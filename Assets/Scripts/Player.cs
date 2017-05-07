@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
     public float fireRate = 0.5f;
     public float nextFire = 0f;
     public bool isFacingRight;
+    public bool isUsingShotgun=false;
     // Use this for initialization
     void Start ()
     {
@@ -66,18 +67,34 @@ public class Player : MonoBehaviour {
         }
 
 	    if (Input.GetAxisRaw("Fire1")>0)
-	    {
-	        if (Time.time > nextFire)
+        {
+            gun.transform.localPosition = new Vector3(0.55f, gun.transform.localPosition.y, gun.transform.localPosition.z);
+            if (Time.time > nextFire)
 	        {
 	            nextFire = Time.time + fireRate;
 	        }
 	        if (isFacingRight)
 	        {
-	            Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0,0,0)));
-	        }
+	            if (isUsingShotgun)
+	            {
+	                Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 90, 0)));
+	            }
+	            else
+	            {
+                    Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+                }
+            }
 	        else
 	        {
-                Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 0, 180f)));
+	            gun.transform.localPosition = new Vector3(-0.8f,gun.transform.localPosition.y, gun.transform.localPosition.z);
+                if (isUsingShotgun)
+                {
+                    Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(180, 90, 0)));
+                }
+                else
+                {
+                    Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+                }
             }
         }
     }

@@ -17,6 +17,7 @@ public class ShotgunBuff : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
+            other.GetComponent<Player>().isUsingShotgun = true;
             other.GetComponent<Player>().bullet = (GameObject) Resources.Load("Prefabs/Bullets/ShotgunBullet", typeof(GameObject));
             Destroy(gameObject);
         }
