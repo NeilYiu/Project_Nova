@@ -5,6 +5,8 @@ public class ShotgunBullet : Bullet {
     public float bulletSpeed;
     public float damage;
     public GameObject explosion;
+    public float coolDown = 0.7f;
+
     // Use this for initialization
     void Awake () {
         //transform.eulerAngles = new Vector3(0,90,0);

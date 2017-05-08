@@ -6,6 +6,7 @@ public class MachineGunBullet : Bullet
     public float bulletSpeed;
     public float damage;
     public GameObject explosion;
+    public float coolDown = 0.2f;
     // Use this for initialization
     void Awake ()
 	{
