@@ -5,11 +5,11 @@ public class Player : MonoBehaviour {
     public float speed = 5f;
     public float arielSpeed = 3f;
 
-    public Vector2 jumpVector;
+    public float jumpHeight;
     public bool isGrounded;
 
     public Transform foot;
-    public float radius;
+    public float groundCheckRadius;
     public LayerMask ground;
 
     public Transform gun;
@@ -23,9 +23,15 @@ public class Player : MonoBehaviour {
     {
         isFacingRight = true;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    void FixedUpdate()
+    {
+        isGrounded = Physics2D.OverlapCircle(foot.transform.position, groundCheckRadius, ground);
+
+    }
+
+    // Update is called once per frame
+    void Update () {
         if (Input.GetKey(KeyCode.A))
         {
             isFacingRight = false;
@@ -59,14 +65,14 @@ public class Player : MonoBehaviour {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
         }
 
-	    isGrounded = Physics2D.OverlapCircle(foot.transform.position, radius, ground);
 
-        if (Input.GetKey(KeyCode.W) && isGrounded)
+        if (Input.GetAxis("Jump")>0 && isGrounded)
         {
-            GetComponent<Rigidbody2D>().AddForce(jumpVector, ForceMode2D.Force);
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
+            //GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpHeight);
         }
 
-	    if (Input.GetAxisRaw("Fire1")>0)
+        if (Input.GetAxisRaw("Fire1")>0)
         {
             gun.transform.localPosition = new Vector3(0.55f, gun.transform.localPosition.y, gun.transform.localPosition.z);
             if (Time.time > nextFire)
@@ -102,7 +108,7 @@ public class Player : MonoBehaviour {
     void OnDrawGizmo()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(foot.transform.position,radius);
+        Gizmos.DrawWireSphere(foot.transform.position,groundCheckRadius);
     }
 
     void OnTriggerEnter2D(Collider2D other)

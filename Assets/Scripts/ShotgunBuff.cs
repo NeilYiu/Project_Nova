@@ -21,5 +21,9 @@ public class ShotgunBuff : MonoBehaviour {
             other.GetComponent<Player>().bullet = (GameObject) Resources.Load("Prefabs/Bullets/ShotgunBullet", typeof(GameObject));
             Destroy(gameObject);
         }
+        if (other.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<Enemy>().health -= 10;
+        }
     }
 }

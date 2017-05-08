@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ShotgunBullet : MonoBehaviour {
+public class ShotgunBullet : Bullet {
     public float bulletSpeed;
-    private Rigidbody2D rigidBody2D;
+    public float damage;
+    public GameObject explosion;
     // Use this for initialization
     void Awake () {
         //transform.eulerAngles = new Vector3(0,90,0);
@@ -22,6 +23,28 @@ public class ShotgunBullet : MonoBehaviour {
 	void Update () {
 	
 	}
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Shootable"))
+        {
+            //decelerate();
+            Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
+    }
 
-    
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Shootable"))
+        {
+            //decelerate();
+            Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
+    }
+
+    public void decelerate()
+    {
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+    }
 }
