@@ -23,6 +23,9 @@ public class Player : MonoBehaviour {
     public float maxHealth = 10;
     public float currentHealth;
 
+    //public float attackTime, attackDelay = 3f;
+    //public bool isAttacking = false;
+
     // Use this for initialization
     void Start ()
     {
@@ -39,7 +42,6 @@ public class Player : MonoBehaviour {
             coolDownTimer -= Time.fixedDeltaTime;
         }
         DetectInputs();
-
     }
 
     // Update is called once per frame
@@ -56,6 +58,7 @@ public class Player : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.A))
         {
+            GetComponent<Animator>().SetBool("isWalking",true);
             isFacingRight = false;
             if (isGrounded)
             {
@@ -66,10 +69,12 @@ public class Player : MonoBehaviour {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(-arielSpeed, GetComponent<Rigidbody2D>().velocity.y);
             }
             //Face to the moving direction
-            //transform.localScale = new Vector3(-1,1,1);
+            transform.localScale = new Vector3(-6, 6, 1);
         }
         else if (Input.GetKey(KeyCode.D))
         {
+            GetComponent<Animator>().SetBool("isWalking", true);
+
             isFacingRight = true;
             if (isGrounded)
             {
@@ -80,10 +85,11 @@ public class Player : MonoBehaviour {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(arielSpeed, GetComponent<Rigidbody2D>().velocity.y);
             }
             //Face to the moving direction
-            //transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(6, 6, 1);
         }
         else
         {
+            GetComponent<Animator>().SetBool("isWalking", false);
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
         }
 
@@ -95,10 +101,12 @@ public class Player : MonoBehaviour {
             //GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpHeight);
         }
 
-        if (Input.GetAxisRaw("Fire1") > 0 && coolDownTimer <= 0)
+        if (Input.GetKeyDown(KeyCode.Space) && coolDownTimer <= 0)
         {
+            GetComponent<Animator>().SetTrigger("Attacking");
+            //attackTime = attackDelay;
             coolDownTimer = coolDown;
-            gun.transform.localPosition = new Vector3(0.55f, gun.transform.localPosition.y,
+            gun.transform.localPosition = new Vector3(0.07f, gun.transform.localPosition.y,
                 gun.transform.localPosition.z);
             if (isFacingRight)
             {
@@ -113,7 +121,7 @@ public class Player : MonoBehaviour {
             }
             else
             {
-                gun.transform.localPosition = new Vector3(-0.8f, gun.transform.localPosition.y,
+                gun.transform.localPosition = new Vector3(-0.07f, gun.transform.localPosition.y,
                     gun.transform.localPosition.z);
                 if (isUsingShotgun)
                 {
@@ -125,7 +133,6 @@ public class Player : MonoBehaviour {
                 }
             }
         }
-        
     }
 
     void OnDrawGizmo()
