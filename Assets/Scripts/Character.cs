@@ -42,18 +42,10 @@ public abstract class Character : MonoBehaviour {
 	
 	}
 
-    public void ChangeDirection(bool isFacingRight)
+    public void ChangeDirection()
     {
-        GetComponent<Animator>().SetBool("isWalking", true);
-        this.isFacingRight = isFacingRight;
-        if (isFacingRight && transform.localScale.x < 0)
-        {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        }
-        else if(!isFacingRight && transform.localScale.x > 0)
-        {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        }
+        isFacingRight = !isFacingRight;
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     //Shoot the bullet after attack
@@ -81,7 +73,6 @@ public abstract class Character : MonoBehaviour {
                 Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 0, 180)));
             }
         }
-
     }
 
     public void Attack()

@@ -10,7 +10,15 @@ public class PatrolState : IEnemyState
     public void Execute()
     {
         Patrol();
+        
         enemy.Move();
+        
+        Debug.Log(enemy.isOnEdge);
+        if (enemy.target!=null)
+        {
+            enemy.ChangeState(new RangedState());
+        }
+        
     }
 
     public void Enter(Enemy enemy)
@@ -24,13 +32,17 @@ public class PatrolState : IEnemyState
 
     public void OnTriggerEnter(Collider2D other)
     {
+        if (other.tag == "Edge")
+        {
+            enemy.ChangeDirection();
+        }
     }
-
     private void Patrol()
     {
         patrolTimer += Time.deltaTime;
         if (patrolTimer>=patrolDuration)
         {
+            patrolTimer = 0;
             enemy.ChangeState(new IdleState());
         }
     }

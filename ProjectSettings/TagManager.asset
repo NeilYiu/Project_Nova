@@ -7,6 +7,7 @@ TagManager:
   - Trap
   - Enemy
   - New Tag
+  - Edge
   layers:
   - Default
   - TransparentFX

@@ -11,24 +11,7 @@ public class Player : Character {
     public Transform foot;
     public float groundCheckRadius;
     public LayerMask ground;
-
-    //public Transform gun;
-    //public GameObject bullet;
-    //public float coolDown;
-    //private float coolDownTimer;
-
-    //public bool isFacingRight;
-    //public bool isUsingShotgun=false;
-
-    //public float maxHealth = 10;
-    //public float currentHealth;
-    //public bool isAttacking = false;
-    //private static Player instance;
-
-    //public static Player Instance
-    //{
-    //    get { return instance ?? (instance = GameObject.FindObjectOfType<Player>()); }
-    //}
+    
     // Use this for initialization
     public override void Start ()
     {
@@ -61,6 +44,8 @@ public class Player : Character {
     {
         if (Input.GetKey(KeyCode.A))
         {
+            GetComponent<Animator>().SetBool("isWalking", true);
+
             if (isGrounded)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(-speed, GetComponent<Rigidbody2D>().velocity.y);
@@ -69,11 +54,16 @@ public class Player : Character {
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(-arielSpeed, GetComponent<Rigidbody2D>().velocity.y);
             }
-            //Face to the moving direction
-            ChangeDirection(false);
+            if (!isFacingRight)
+            {
+                //Face to the moving direction
+                ChangeDirection();
+            }
         }
         else if (Input.GetKey(KeyCode.D))
         {
+            GetComponent<Animator>().SetBool("isWalking", true);
+
             if (isGrounded)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(speed, GetComponent<Rigidbody2D>().velocity.y);
@@ -82,8 +72,11 @@ public class Player : Character {
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(arielSpeed, GetComponent<Rigidbody2D>().velocity.y);
             }
-            //Face to the moving direction
-            ChangeDirection(true);
+            if (isFacingRight)
+            {
+                //Face to the moving direction
+                ChangeDirection();
+            }
         }
         else
         {
