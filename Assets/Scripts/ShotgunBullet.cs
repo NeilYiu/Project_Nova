@@ -9,8 +9,6 @@ public class ShotgunBullet : Bullet {
 
     // Use this for initialization
     void Awake () {
-        //transform.eulerAngles = new Vector3(0,90,0);
-        Debug.Log(transform.localRotation.z);
         if (transform.localRotation.x > 0)
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(-1, 0) * bulletSpeed, ForceMode2D.Impulse);
