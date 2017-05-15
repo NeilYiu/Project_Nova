@@ -13,12 +13,10 @@ public class PatrolState : IEnemyState
         
         enemy.Move();
         
-        Debug.Log(enemy.isOnEdge);
-        if (enemy.target!=null)
+        if (enemy.target!=null && enemy.InShootRange)
         {
             enemy.ChangeState(new RangedState());
         }
-        
     }
 
     public void Enter(Enemy enemy)

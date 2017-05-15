@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public abstract class Character : MonoBehaviour {
+    public float health;
     public float speed = 5f;
     public Transform gun;
     public GameObject bullet;
@@ -11,9 +14,15 @@ public abstract class Character : MonoBehaviour {
     public float maxHealth = 10;
     public float currentHealth;
     public bool isAttacking = false;
-    public static Player instance;
     public bool isUsingShotgun = false;
-
+    public bool isMelee;
+    public bool isTakingDamage;
+    public static Player instance;
+    public bool isDying;
+    [SerializeField]
+    private EdgeCollider2D meleeCollider;
+    [SerializeField]
+    public List<string> damageSource;
     public static Player Instance
     {
         get { return instance ?? (instance = GameObject.FindObjectOfType<Player>()); }
@@ -22,7 +31,7 @@ public abstract class Character : MonoBehaviour {
     // Use this for initialization
     public virtual void Start ()
     {
-        isFacingRight = true;
+        isFacingRight = transform.localScale.x > 0;
     }
 
     public virtual void FixedUpdate()
@@ -36,9 +45,17 @@ public abstract class Character : MonoBehaviour {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
-	
-	// Update is called once per frame
-	public virtual void Update () {
+    public void MeleeAttack()
+    {
+        meleeCollider.enabled = !meleeCollider.enabled;
+    }
+
+    public virtual void OnTriggerEnter2D(Collider2D other)
+    {
+        
+    }
+    // Update is called once per frame
+    public virtual void Update () {
 	
 	}
 
@@ -51,26 +68,29 @@ public abstract class Character : MonoBehaviour {
     //Shoot the bullet after attack
     public void Shoot()
     {
-        if (isFacingRight)
+        if (!isMelee)
         {
-            if (isUsingShotgun)
+            if (isFacingRight)
             {
-                Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 90, 0)));
+                if (isUsingShotgun)
+                {
+                    Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 90, 0)));
+                }
+                else
+                {
+                    Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+                }
             }
             else
             {
-                Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-            }
-        }
-        else
-        {
-            if (isUsingShotgun)
-            {
-                Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(180, 90, 0)));
-            }
-            else
-            {
-                Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+                if (isUsingShotgun)
+                {
+                    Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(180, 90, 0)));
+                }
+                else
+                {
+                    Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+                }
             }
         }
     }

@@ -4,16 +4,19 @@ using System.Collections;
 public class RangedState : IEnemyState
 {
     private Enemy enemy;
-    private float shootTimer;
-    private float bulletCoolDown=10;
     public void Execute()
     {
+        if (enemy.target == null)
+        {
+            enemy.ChangeState(new PatrolState());
+        }
+        if (enemy.InMeleeRange)
+        {
+            enemy.ChangeState(new MeleeState());
+        }
         if (enemy.coolDownTimer <= 0)
         {
-            if (enemy.target==null)
-            {
-                enemy.ChangeState(new PatrolState());
-            }
+            enemy.isMelee = false;
             enemy.Attack();
         }
         if (enemy.target!=null&&!enemy.isAttacking)

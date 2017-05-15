@@ -538,9 +538,10 @@ GameObject:
   - 4: {fileID: 261439625}
   - 61: {fileID: 261439626}
   - 114: {fileID: 261439627}
+  - 114: {fileID: 261439628}
   m_Layer: 0
   m_Name: Sight
-  m_TagString: Untagged
+  m_TagString: EnemySight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -583,6 +584,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 761219997}
+--- !u!114 &261439628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 261439624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b10451bb310bcf54c90118092feef5c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  others:
+  - {fileID: 1109360266}
+  - {fileID: 6138966, guid: aea211e3655bdc64e9831bdd79e4af35, type: 2}
 --- !u!1001 &289849172
 Prefab:
   m_ObjectHideFlags: 0
@@ -745,6 +760,7 @@ GameObject:
   - 50: {fileID: 657217016}
   - 61: {fileID: 657217015}
   - 114: {fileID: 657217017}
+  - 68: {fileID: 657217018}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Player
@@ -806,11 +822,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 657217011}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -46.88, y: 1.14, z: 0}
+  m_LocalPosition: {x: -51.11, y: 1.14, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children:
   - {fileID: 709770400}
   - {fileID: 677460337}
+  - {fileID: 1109360265}
   m_Father: {fileID: 0}
   m_RootOrder: 18
 --- !u!61 &657217015
@@ -855,7 +872,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52061321c41e0154081bbec8f084d6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  health: 10
+  speed: 6
   gun: {fileID: 677460337}
   bullet: {fileID: 166236, guid: aea211e3655bdc64e9831bdd79e4af35, type: 2}
   coolDown: 2
@@ -865,14 +883,43 @@ MonoBehaviour:
   currentHealth: 0
   isAttacking: 0
   isUsingShotgun: 0
+  isMelee: 0
+  isTakingDamage: 0
+  isDying: 0
+  meleeCollider: {fileID: 1109360266}
+  damageSource:
+  - EnemyBullet
+  - EnemyMelee
   arielSpeed: 3
-  jumpHeight: 8
+  jumpHeight: 10
   isGrounded: 0
   foot: {fileID: 709770400}
   groundCheckRadius: 0
   ground:
     serializedVersion: 2
     m_Bits: 256
+--- !u!68 &657217018
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 657217011}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: 0.053136192, y: 0.17291147}
+  - {x: 0.17074713, y: 0.1577535}
+  - {x: 0.22096443, y: 0.10918596}
+  - {x: 0.2482338, y: 0.02785657}
+  - {x: 0.23921967, y: -0.06142071}
+  - {x: 0.17529552, y: -0.14331758}
+  - {x: 0.11598079, y: -0.18171689}
+  - {x: 0.05529785, y: -0.18266457}
+  - {x: 0.05451457, y: 0.17218068}
 --- !u!1 &676438304 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 129416, guid: efbe801dddbd2f1478d412defec24735, type: 2}
@@ -1057,7 +1104,7 @@ GameObject:
   - 114: {fileID: 761220000}
   m_Layer: 0
   m_Name: Skeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1116,11 +1163,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 761219993}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -44.73, y: -1.68, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 1}
+  m_LocalPosition: {x: -41.58, y: -1.68, z: 0}
+  m_LocalScale: {x: -6, y: 6, z: 1}
   m_Children:
   - {fileID: 1729486457}
   - {fileID: 261439625}
+  - {fileID: 948454647}
   m_Father: {fileID: 0}
   m_RootOrder: 21
 --- !u!114 &761219997
@@ -1134,9 +1182,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb81d83f7548ce47876f905151676ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 10
   speed: 5
   gun: {fileID: 1729486457}
-  bullet: {fileID: 166236, guid: aea211e3655bdc64e9831bdd79e4af35, type: 2}
+  bullet: {fileID: 166236, guid: 4326b04591862a748af8a8fe031d52a2, type: 2}
   coolDown: 2
   coolDownTimer: 0
   isFacingRight: 0
@@ -1144,9 +1193,17 @@ MonoBehaviour:
   currentHealth: 0
   isAttacking: 0
   isUsingShotgun: 0
-  health: 10
+  isMelee: 0
+  isTakingDamage: 0
+  isDying: 0
+  meleeCollider: {fileID: 948454648}
+  damageSource:
+  - PlayerMelee
+  - ShotgunBullet
+  - Bullet
   target: {fileID: 0}
-  isOnEdge: 0
+  meleeRange: 1.6
+  shootRange: 10
 --- !u!50 &761219998
 Rigidbody2D:
   serializedVersion: 2
@@ -1172,7 +1229,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 761219993}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e3fbcc497f408bb4d95ee27def7a9411, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
@@ -1189,7 +1246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10451bb310bcf54c90118092feef5c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  other: {fileID: 657217015}
+  others:
+  - {fileID: 657217015}
 --- !u!1 &761952373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1375,7 +1433,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 789208432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -45.62, y: 0, z: -10.53}
+  m_LocalPosition: {x: -48.44, y: 0, z: -10.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1572,6 +1630,56 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.2}
+--- !u!1 &948454646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 948454647}
+  - 68: {fileID: 948454648}
+  m_Layer: 0
+  m_Name: Axe
+  m_TagString: EnemyMelee
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &948454647
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 948454646}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 761219996}
+  m_RootOrder: 2
+--- !u!68 &948454648
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 948454646}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: 0.053136192, y: 0.17291147}
+  - {x: 0.17074713, y: 0.1577535}
+  - {x: 0.22096443, y: 0.10918596}
+  - {x: 0.2482338, y: 0.02785657}
+  - {x: 0.23921967, y: -0.06142071}
+  - {x: 0.17529552, y: -0.14331758}
+  - {x: 0.11598079, y: -0.18171689}
+  - {x: 0.05529785, y: -0.18266457}
+  - {x: 0.05451457, y: 0.17218068}
 --- !u!1 &1001165112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1774,6 +1882,69 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 71f0dc21351f4a2459c36ecff3ebca09, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1109360264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1109360265}
+  - 68: {fileID: 1109360266}
+  - 114: {fileID: 1109360267}
+  m_Layer: 0
+  m_Name: Sword
+  m_TagString: PlayerMelee
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1109360265
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1109360264}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 657217014}
+  m_RootOrder: 2
+--- !u!68 &1109360266
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1109360264}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: 0.053136192, y: 0.17291147}
+  - {x: 0.17074713, y: 0.1577535}
+  - {x: 0.22096443, y: 0.10918596}
+  - {x: 0.2482338, y: 0.02785657}
+  - {x: 0.23921967, y: -0.06142071}
+  - {x: 0.17529552, y: -0.14331758}
+  - {x: 0.11598079, y: -0.18171689}
+  - {x: 0.05529785, y: -0.18266457}
+  - {x: 0.05451457, y: 0.17218068}
+--- !u!114 &1109360267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1109360264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcba5710c13aa84faf73a1a2134fe78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1001 &1144828839
 Prefab:
   m_ObjectHideFlags: 0
@@ -1783,7 +1954,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 441726, guid: efbe801dddbd2f1478d412defec24735, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -47.65
+      value: -51.15
       objectReference: {fileID: 0}
     - target: {fileID: 441726, guid: efbe801dddbd2f1478d412defec24735, type: 2}
       propertyPath: m_LocalPosition.y
