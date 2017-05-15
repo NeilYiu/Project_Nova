@@ -8,6 +8,7 @@ public class Enemy : Character
     public float meleeRange=1;
     public float shootRange = 10;
     public float distanceForShotgunToStartDamaging=1;
+    public float meleeDamage = 2.5f;
     public bool InMeleeRange
     {
         get
@@ -104,6 +105,7 @@ public class Enemy : Character
             }
             if (other.tag == "PlayerMelee")
             {
+                Instantiate(Resources.Load("Prefabs/EnemyHittedByMelee"), transform.position, transform.rotation);
                 health -= other.GetComponent<PlayerSword>().damage;
             }
             GetComponent<Animator>().SetTrigger("hit");

@@ -8,15 +8,28 @@ public class Player : Character {
     public Transform foot;
     public float groundCheckRadius;
     public LayerMask ground;
-    
+    public bool isInvincible=false;
+    public float invincibleTime = 10f;
+    public float invincibleTimer;
+
     // Use this for initialization
     public override void Start ()
     {
+        invincibleTimer = invincibleTime;
         currentHealth = maxHealth;
         coolDown = bullet.GetComponent<MachineGunBullet>().coolDown;
     }
     public override void FixedUpdate()
     {
+        if (isInvincible)
+        {
+            invincibleTimer -= Time.deltaTime;
+        }
+        if (invincibleTimer<=0)
+        {
+            isInvincible = false;
+            invincibleTimer = invincibleTime;
+        }
         isGrounded = Physics2D.OverlapCircle(foot.transform.position, groundCheckRadius, ground);
         base.FixedUpdate();
         DetectInputs();
@@ -96,20 +109,57 @@ public class Player : Character {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(foot.transform.position,groundCheckRadius);
     }
-    
+
+    private IEnumerator InvincibleIndicator()
+    {
+        while (isInvincible)
+        {
+            GetComponent<Renderer>().material.color = Color.yellow;
+            yield return new WaitForSeconds(0.1f);
+            GetComponent<Renderer>().material.color = Color.white;
+            yield return new WaitForSeconds(0.1f);
+        }
+        StopCoroutine("InvincibleIndicator");
+    }
+
     public override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
         if (damageSource.Contains(other.tag) && !isDying && !isTakingDamage)
         {
-            health -= other.GetComponent<MachineGunBullet>().damage;
-            GetComponent<Animator>().SetTrigger("block");
-            if (health <= 0)
+            if (isInvincible)
             {
-                isDying = true;
-                GetComponent<Animator>().SetTrigger("die");
+                GetComponent<Animator>().SetTrigger("block");
+            }
+            else
+            {
+                if (other.tag == "EnemyMelee")
+                {
+                    Instantiate(Resources.Load("Prefabs/PlayerHittedByMelee"), transform.position, transform.rotation);
+
+                    health -= other.transform.parent.GetComponent<Enemy>().meleeDamage;
+                }
+                else
+                {
+                    health -= other.GetComponent<MachineGunBullet>().damage;
+                }
+                gameObject.GetComponent<Renderer>().material.color = Color.red;
+                StartCoroutine("resetColor");
+                //GetComponent<Animator>().SetTrigger("block");
+                if (health <= 0)
+                {
+                    isDying = true;
+                    GetComponent<Animator>().SetTrigger("die");
+                }
             }
         }
+    }
+
+    IEnumerator resetColor()
+    {
+        yield return new WaitForSeconds(1f);
+        gameObject.GetComponent<Renderer>().material.color = Color.white;
+        StopCoroutine("resetColor");
     }
 
     void Explode()
