@@ -47,6 +47,10 @@ public class Player : Character {
 
     private void DetectInputs()
     {
+        if (isAttacking)
+        {
+            return;
+        }
         if (Input.GetKey(KeyCode.A))
         {
             GetComponent<Animator>().SetBool("isWalking", true);

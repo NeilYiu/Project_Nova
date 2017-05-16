@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DieBehaviour : StateMachineBehaviour
 {
-    private float resurrectCoolDown=3;
+    private float resurrectCoolDown=10;
     private float deathTimer;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

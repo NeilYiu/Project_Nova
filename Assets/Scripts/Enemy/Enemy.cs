@@ -9,6 +9,11 @@ public class Enemy : Character
     public float shootRange = 10;
     public float distanceForShotgunToStartDamaging=1;
     public float meleeDamage = 2.5f;
+    [SerializeField]
+    private Transform leftEdge;
+    [SerializeField]
+    private Transform rightEdge;
+
     public bool InMeleeRange
     {
         get
@@ -33,12 +38,16 @@ public class Enemy : Character
     }
     public void Move()
     {
+        if (isAttacking)
+        {
+            return;
+        }
         GetComponent<Animator>().SetBool("isWalking",true);
-        if (isFacingRight)
+        if (isFacingRight && rightEdge.position.x > transform.position.x)
         {
             transform.Translate(Vector2.right * speed * Time.deltaTime);
         }
-        else
+        else if (!isFacingRight && leftEdge.position.x < transform.position.x)
         {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
@@ -90,6 +99,7 @@ public class Enemy : Character
     public override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
+
         if (other.tag == "Edge")
         {
             currentState.OnTriggerEnter(other);
@@ -117,7 +127,7 @@ public class Enemy : Character
     void OnParticleCollision(GameObject other)
     {
         float distance = Vector3.Distance(other.transform.position, transform.position);
-        if (other.tag == "ShotgunBullet" && !isDying )
+        if (other.tag == "ShotgunBullet" && !isDying && distance < distanceForShotgunToStartDamaging)
         {
             currentHealth -= other.GetComponent<ShotgunBullet>().damage;
             GetComponent<Animator>().SetTrigger("hit");
@@ -127,5 +137,10 @@ public class Enemy : Character
                 GetComponent<Animator>().SetTrigger("die");
             }
         }
+    }
+
+    bool TryDodge()
+    {
+        return false;
     }
 }

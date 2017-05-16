@@ -42,10 +42,10 @@ public abstract class Character : MonoBehaviour {
         {
             coolDownTimer -= Time.fixedDeltaTime;
         }
-        if (isAttacking)
-        {
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        }
+        //if (isAttacking)
+        //{
+        //    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        //}
     }
     public void MeleeAttack()
     {
