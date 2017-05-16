@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using JetBrains.Annotations;
 
 public class IdleState : IEnemyState
 {
@@ -27,7 +28,16 @@ public class IdleState : IEnemyState
 
     public void OnTriggerEnter(Collider2D other)
     {
+        if (other.tag=="Bullet")
+        {
+            
+            
+        }
+    }
 
+    void OnParticleCollision(GameObject other)
+    {
+        
     }
 
     void OnTriggerStay(Collider2D other)

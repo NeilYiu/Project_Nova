@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public abstract class Character : MonoBehaviour {
-    public float health;
     public float speed = 5f;
     public Transform gun;
     public GameObject bullet;
@@ -20,7 +19,7 @@ public abstract class Character : MonoBehaviour {
     public static Player instance;
     public bool isDying;
     [SerializeField]
-    private EdgeCollider2D meleeCollider;
+    public EdgeCollider2D meleeCollider;
     [SerializeField]
     public List<string> damageSource;
     public static Player Instance
@@ -31,6 +30,9 @@ public abstract class Character : MonoBehaviour {
     // Use this for initialization
     public virtual void Start ()
     {
+        meleeCollider.enabled = false;
+        currentHealth = maxHealth;
+        coolDown = bullet.GetComponent<MachineGunBullet>().coolDown;
         isFacingRight = transform.localScale.x > 0;
     }
 

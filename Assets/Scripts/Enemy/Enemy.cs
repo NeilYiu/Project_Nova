@@ -73,22 +73,19 @@ public class Enemy : Character
 
     // Update is called once per frame
     void Update () {
+        
         if (!isDying&&!isTakingDamage)
         {
             currentState.Execute();
             LookAtTarget();
         }
     }
-
-    public void Damage(int damage)
-    {
-        health -= damage;
-    }
-
+    
     public void Explode()
     {
         Instantiate(Resources.Load("Prefabs/MobDie"), transform.position, transform.rotation);
-        Destroy(gameObject);
+        //gameObject.SetActive(false);
+        //Destroy(gameObject);
     }
     public override void OnTriggerEnter2D(Collider2D other)
     {
@@ -101,15 +98,15 @@ public class Enemy : Character
         {
             if (other.tag == "Bullet")
             {
-                health -= other.GetComponent<MachineGunBullet>().damage;
+                currentHealth -= other.GetComponent<MachineGunBullet>().damage;
             }
             if (other.tag == "PlayerMelee")
             {
                 Instantiate(Resources.Load("Prefabs/EnemyHittedByMelee"), transform.position, transform.rotation);
-                health -= other.GetComponent<PlayerSword>().damage;
+                currentHealth -= other.GetComponent<PlayerSword>().damage;
             }
             GetComponent<Animator>().SetTrigger("hit");
-            if (health <= 0)
+            if (currentHealth <= 0)
             {
                 isDying = true;
                 GetComponent<Animator>().SetTrigger("die");
@@ -120,12 +117,11 @@ public class Enemy : Character
     void OnParticleCollision(GameObject other)
     {
         float distance = Vector3.Distance(other.transform.position, transform.position);
-        Debug.Log(distance);
-        if (other.tag == "ShotgunBullet" && !isDying && distance < distanceForShotgunToStartDamaging)
+        if (other.tag == "ShotgunBullet" && !isDying )
         {
-            health -= other.GetComponent<ShotgunBullet>().damage;
+            currentHealth -= other.GetComponent<ShotgunBullet>().damage;
             GetComponent<Animator>().SetTrigger("hit");
-            if (health <= 0)
+            if (currentHealth <= 0)
             {
                 isDying = true;
                 GetComponent<Animator>().SetTrigger("die");

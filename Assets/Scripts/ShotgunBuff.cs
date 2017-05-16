@@ -25,7 +25,7 @@ public class ShotgunBuff : MonoBehaviour {
         }
         if (other.tag == "Enemy")
         {
-            other.gameObject.GetComponent<Enemy>().health -= 10;
+            other.gameObject.GetComponent<Enemy>().currentHealth -= 10;
         }
     }
 }

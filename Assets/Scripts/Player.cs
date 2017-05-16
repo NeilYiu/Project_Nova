@@ -15,9 +15,8 @@ public class Player : Character {
     // Use this for initialization
     public override void Start ()
     {
+        base.Start();
         invincibleTimer = invincibleTime;
-        currentHealth = maxHealth;
-        coolDown = bullet.GetComponent<MachineGunBullet>().coolDown;
     }
     public override void FixedUpdate()
     {
@@ -137,16 +136,16 @@ public class Player : Character {
                 {
                     Instantiate(Resources.Load("Prefabs/PlayerHittedByMelee"), transform.position, transform.rotation);
 
-                    health -= other.transform.parent.GetComponent<Enemy>().meleeDamage;
+                    currentHealth -= other.transform.parent.GetComponent<Enemy>().meleeDamage;
                 }
                 else
                 {
-                    health -= other.GetComponent<MachineGunBullet>().damage;
+                    currentHealth -= other.GetComponent<MachineGunBullet>().damage;
                 }
                 gameObject.GetComponent<Renderer>().material.color = Color.red;
                 StartCoroutine("resetColor");
                 //GetComponent<Animator>().SetTrigger("block");
-                if (health <= 0)
+                if (currentHealth <= 0)
                 {
                     isDying = true;
                     GetComponent<Animator>().SetTrigger("die");
