@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Player : Character {
     public float arielSpeed = 3f;
@@ -11,11 +12,12 @@ public class Player : Character {
     public bool isInvincible=false;
     public float invincibleTime = 10f;
     public float invincibleTimer;
-
+    public Image healthBarUI;
     // Use this for initialization
     public override void Start ()
     {
         base.Start();
+        healthBarUI = GameObject.Find("PlayerStats/HealthBarBG/Health").GetComponent<Image>();
         invincibleTimer = invincibleTime;
     }
     public override void FixedUpdate()
@@ -145,10 +147,11 @@ public class Player : Character {
                 else
                 {
                     currentHealth -= other.GetComponent<MachineGunBullet>().damage;
+
                 }
+                healthBarUI.fillAmount = currentHealth / maxHealth;
                 gameObject.GetComponent<Renderer>().material.color = Color.red;
                 StartCoroutine("resetColor");
-                //GetComponent<Animator>().SetTrigger("block");
                 if (currentHealth <= 0)
                 {
                     isDying = true;

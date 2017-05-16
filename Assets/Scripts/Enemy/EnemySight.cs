@@ -19,6 +19,7 @@ public class EnemySight : MonoBehaviour
         if (other.tag == "Player")
         {
             enemy.target = null;
+            //enemy.ChangeDirection();
         }
     }
 }

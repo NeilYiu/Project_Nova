@@ -36,6 +36,10 @@ public class RangedState : IEnemyState
 
     public void OnTriggerEnter(Collider2D other)
     {
+        //if (enemy.target!=null)
+        //{
+        //    return;
+        //}
         if (other.tag == "Edge")
         {
             enemy.target = null;

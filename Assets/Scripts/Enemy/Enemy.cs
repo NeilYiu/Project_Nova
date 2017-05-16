@@ -9,6 +9,8 @@ public class Enemy : Character
     public float shootRange = 10;
     public float distanceForShotgunToStartDamaging=1;
     public float meleeDamage = 2.5f;
+    public bool isDodging = false;
+    public int flee = 50;
     [SerializeField]
     private Transform leftEdge;
     [SerializeField]
@@ -38,7 +40,7 @@ public class Enemy : Character
     }
     public void Move()
     {
-        if (isAttacking)
+        if (isAttacking || isDodging)
         {
             return;
         }
@@ -81,15 +83,27 @@ public class Enemy : Character
 	}
 
     // Update is called once per frame
-    void Update () {
-        
+    void Update ()
+    {
+        //float distance = Vector3.Distance(target.transform.position, transform.position);
         if (!isDying&&!isTakingDamage)
         {
+            Debug.Log(currentState);
             currentState.Execute();
             LookAtTarget();
         }
     }
-    
+
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        if (isDodging)
+        {
+            isDodging = false;
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0,5),ForceMode2D.Impulse);
+        }
+    }
+
     public void Explode()
     {
         Instantiate(Resources.Load("Prefabs/MobDie"), transform.position, transform.rotation);
@@ -106,23 +120,35 @@ public class Enemy : Character
         }
         if (damageSource.Contains(other.tag) && !isDying && !isTakingDamage)
         {
-            if (other.tag == "Bullet")
+            isDodging = TryDodge();
+            if (!isDodging)
             {
-                currentHealth -= other.GetComponent<MachineGunBullet>().damage;
-            }
-            if (other.tag == "PlayerMelee")
-            {
-                Instantiate(Resources.Load("Prefabs/EnemyHittedByMelee"), transform.position, transform.rotation);
-                currentHealth -= other.GetComponent<PlayerSword>().damage;
-            }
-            GetComponent<Animator>().SetTrigger("hit");
-            if (currentHealth <= 0)
-            {
-                isDying = true;
-                GetComponent<Animator>().SetTrigger("die");
+                if (other.tag == "Bullet")
+                {
+                    currentHealth -= other.GetComponent<MachineGunBullet>().damage;
+                }
+                if (other.tag == "PlayerMelee")
+                {
+                    Instantiate(Resources.Load("Prefabs/EnemyHittedByMelee"), transform.position, transform.rotation);
+                    currentHealth -= other.GetComponent<PlayerSword>().damage;
+                }
+                GetComponent<Animator>().SetTrigger("hit");
+                if (currentHealth <= 0)
+                {
+                    isDying = true;
+                    GetComponent<Animator>().SetTrigger("die");
+                }
             }
         }
     }
+
+    //void OnTriggerStay2D(Collider2D other)
+    //{
+    //    if (other.tag=="Edge")
+    //    {
+    //        currentState.OnTriggerEnter(other);
+    //    }
+    //}
 
     void OnParticleCollision(GameObject other)
     {
@@ -141,6 +167,11 @@ public class Enemy : Character
 
     bool TryDodge()
     {
+        int number = UnityEngine.Random.Range(1, 100);
+        if (number < flee)
+        {
+            return true;
+        }
         return false;
     }
 }

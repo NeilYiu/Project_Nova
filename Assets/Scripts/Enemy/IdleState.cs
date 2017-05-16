@@ -18,6 +18,7 @@ public class IdleState : IEnemyState
 
     public void Enter(Enemy enemy)
     {
+        idleDuration = UnityEngine.Random.Range(1, 3);
         this.enemy = enemy;
     }
 
@@ -28,23 +29,10 @@ public class IdleState : IEnemyState
 
     public void OnTriggerEnter(Collider2D other)
     {
-        if (other.tag=="Bullet")
+        if (other.tag == "Bullet")
         {
-            
-            
-        }
-    }
 
-    void OnParticleCollision(GameObject other)
-    {
-        
-    }
 
-    void OnTriggerStay(Collider2D other)
-    {
-        if (other.tag == "Edge")
-        {
-            //enemy.ChangeDirection();
         }
     }
 

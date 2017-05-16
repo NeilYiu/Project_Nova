@@ -11,7 +11,7 @@ public class MeleeState : IEnemyState
         {
             enemy.ChangeState(new PatrolState());
         }
-        if (enemy.InMeleeRange)
+        if (enemy.InMeleeRange && enemy.coolDownTimer <= 0)
         {
             enemy.isMelee = true;
             enemy.Attack();
@@ -34,6 +34,10 @@ public class MeleeState : IEnemyState
 
     public void OnTriggerEnter(Collider2D other)
     {
+        //if (enemy.target != null)
+        //{
+        //    return;
+        //}
         if (other.tag == "Edge")
         {
             enemy.target = null;
