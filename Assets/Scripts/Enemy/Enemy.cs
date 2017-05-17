@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Enemy : Character
 {
@@ -11,6 +12,8 @@ public class Enemy : Character
     public float meleeDamage = 2.5f;
     public bool isDodging = false;
     public int flee = 50;
+    public Image healthBarUI;
+
     [SerializeField]
     private Transform leftEdge;
     [SerializeField]
@@ -79,6 +82,7 @@ public class Enemy : Character
 	// Use this for initialization
 	public override void Start () {
 	    base.Start();
+        healthBarUI = GameObject.Find("EnemyStats/HealthBarBG/Health").GetComponent<Image>();
         ChangeState(new IdleState());
 	}
 
@@ -88,7 +92,7 @@ public class Enemy : Character
         //float distance = Vector3.Distance(target.transform.position, transform.position);
         if (!isDying&&!isTakingDamage)
         {
-            Debug.Log(currentState);
+            //Debug.Log(currentState);
             currentState.Execute();
             LookAtTarget();
         }
@@ -123,20 +127,25 @@ public class Enemy : Character
             isDodging = TryDodge();
             if (!isDodging)
             {
-                if (other.tag == "Bullet")
+                float distance = Vector3.Distance(other.transform.position, transform.position);
+                if (distance < distanceForShotgunToStartDamaging)
                 {
-                    currentHealth -= other.GetComponent<MachineGunBullet>().damage;
-                }
-                if (other.tag == "PlayerMelee")
-                {
-                    Instantiate(Resources.Load("Prefabs/EnemyHittedByMelee"), transform.position, transform.rotation);
-                    currentHealth -= other.GetComponent<PlayerSword>().damage;
-                }
-                GetComponent<Animator>().SetTrigger("hit");
-                if (currentHealth <= 0)
-                {
-                    isDying = true;
-                    GetComponent<Animator>().SetTrigger("die");
+                    if (other.tag == "Bullet")
+                    {
+                        currentHealth -= other.GetComponent<MachineGunBullet>().damage;
+                    }
+                    if (other.tag == "PlayerMelee")
+                    {
+                        Instantiate(Resources.Load("Prefabs/EnemyHittedByMelee"), transform.position, transform.rotation);
+                        currentHealth -= other.GetComponent<PlayerSword>().damage;
+                    }
+                    healthBarUI.fillAmount = currentHealth / maxHealth;
+                    GetComponent<Animator>().SetTrigger("hit");
+                    if (currentHealth <= 0)
+                    {
+                        isDying = true;
+                        GetComponent<Animator>().SetTrigger("die");
+                    }
                 }
             }
         }
@@ -149,13 +158,13 @@ public class Enemy : Character
     //        currentState.OnTriggerEnter(other);
     //    }
     //}
-
     void OnParticleCollision(GameObject other)
     {
         float distance = Vector3.Distance(other.transform.position, transform.position);
         if (other.tag == "ShotgunBullet" && !isDying && distance < distanceForShotgunToStartDamaging)
         {
             currentHealth -= other.GetComponent<ShotgunBullet>().damage;
+            healthBarUI.fillAmount = currentHealth / maxHealth;
             GetComponent<Animator>().SetTrigger("hit");
             if (currentHealth <= 0)
             {
