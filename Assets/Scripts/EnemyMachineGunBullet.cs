@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MachineGunBullet : Bullet
+public class EnemyMachineGunBullet : Bullet
 {
     public float bulletSpeed;
     public float damage;

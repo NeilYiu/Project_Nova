@@ -13,7 +13,7 @@ public class Enemy : Character
     public bool isDodging = false;
     public int flee = 50;
     public Image healthBarUI;
-
+    public float meleePushIntensity=100;
     [SerializeField]
     private Transform leftEdge;
     [SerializeField]

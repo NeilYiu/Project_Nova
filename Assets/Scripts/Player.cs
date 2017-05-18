@@ -13,6 +13,9 @@ public class Player : Character {
     public float invincibleTime = 10f;
     public float invincibleTimer;
     public Image healthBarUI;
+    public bool isBeingPushed;
+    public float pushedDistance;
+    private bool isPushedToRight;
     // Use this for initialization
     public override void Start ()
     {
@@ -34,6 +37,20 @@ public class Player : Character {
         isGrounded = Physics2D.OverlapCircle(foot.transform.position, groundCheckRadius, ground);
         base.FixedUpdate();
         DetectInputs();
+        if (isBeingPushed)
+        {
+            isBeingPushed = false;
+            Debug.Log(pushedDistance);
+            if (isPushedToRight)
+            {
+
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(pushedDistance, 0), ForceMode2D.Impulse);
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(-pushedDistance, 0), ForceMode2D.Impulse);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -45,6 +62,7 @@ public class Player : Character {
             Instantiate(Resources.Load("Prefabs/PlayerDie"),gameObject.transform.position, Quaternion.Euler(new Vector3(270, 0, 0)));
             Destroy(gameObject);
         }
+        
     }
 
     private void DetectInputs()
@@ -79,7 +97,6 @@ public class Player : Character {
                 //Face to the moving direction
                 ChangeDirection();
             }
-
             if (isGrounded)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(speed, GetComponent<Rigidbody2D>().velocity.y);
@@ -88,7 +105,6 @@ public class Player : Character {
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(arielSpeed, GetComponent<Rigidbody2D>().velocity.y);
             }
-
         }
         else
         {
@@ -138,17 +154,22 @@ public class Player : Character {
             }
             else
             {
+                isBeingPushed = true;
+
                 if (other.tag == "EnemyMelee")
                 {
                     Instantiate(Resources.Load("Prefabs/PlayerHittedByMelee"), transform.position, transform.rotation);
-
+                    pushedDistance = other.GetComponentInParent<Enemy>().meleePushIntensity;
+                    isPushedToRight = other.GetComponentInParent<Enemy>().isFacingRight;
                     currentHealth -= other.transform.parent.GetComponent<Enemy>().meleeDamage;
                 }
                 else
                 {
+                    pushedDistance = other.GetComponent<MachineGunBullet>().pushIntensity;
+                    isPushedToRight = other.GetComponent<Rigidbody2D>().velocity.x > 0;
                     currentHealth -= other.GetComponent<MachineGunBullet>().damage;
-
                 }
+                
                 healthBarUI.fillAmount = currentHealth / maxHealth;
                 gameObject.GetComponent<Renderer>().material.color = Color.red;
                 StartCoroutine("resetColor");

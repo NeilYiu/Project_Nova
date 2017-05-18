@@ -89,6 +89,7 @@ MonoBehaviour:
   bulletSpeed: 23
   damage: 1
   coolDown: 0.2
+  pushIntensity: 0
 --- !u!212 &21210740
 SpriteRenderer:
   m_ObjectHideFlags: 1
