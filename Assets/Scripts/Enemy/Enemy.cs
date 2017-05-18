@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 using UnityEngine.UI;
 
 public class Enemy : Character
@@ -13,7 +14,12 @@ public class Enemy : Character
     public bool isDodging = false;
     public int flee = 50;
     public Image healthBarUI;
-    public float meleePushIntensity=100;
+    public float meleePushDistance;
+    public float meleePushCountsOfUnitDistance=3;
+    public int coins = 10;
+    public Text coinText;
+    public float dodgeHeight;
+    public float dodgeSpeed = 10f;
     [SerializeField]
     private Transform leftEdge;
     [SerializeField]
@@ -41,6 +47,7 @@ public class Enemy : Character
             return false;
         }
     }
+    
     public void Move()
     {
         if (isAttacking || isDodging)
@@ -82,13 +89,20 @@ public class Enemy : Character
 	// Use this for initialization
 	public override void Start () {
 	    base.Start();
-        healthBarUI = GameObject.Find("EnemyStats/HealthBarBG/Health").GetComponent<Image>();
+        //Debug.Log(GetComponent<Renderer>().bounds.size.y);
+	    dodgeSpeed = (float) (GetComponent<Renderer>().bounds.size.y * 0.2);
+        dodgeHeight = GetComponent<Renderer>().bounds.size.y;
+	    meleePushDistance = GetComponent<Renderer>().bounds.size.x* meleePushCountsOfUnitDistance;
+        coinText = GameObject.Find("PlayerStats/CoinsNum").GetComponent<Text>();
+        healthBarUI = transform.Find("EnemyStats/HealthBarBG/Health").GetComponent<Image>();
         ChangeState(new IdleState());
 	}
 
     // Update is called once per frame
     void Update ()
     {
+        //0 is left
+        healthBarUI.fillOrigin = isFacingRight ? 0 : 1;
         //float distance = Vector3.Distance(target.transform.position, transform.position);
         if (!isDying&&!isTakingDamage)
         {
@@ -103,13 +117,28 @@ public class Enemy : Character
         base.FixedUpdate();
         if (isDodging)
         {
+            //if (dodgeHeight >= 0)
+            //{
+            //    dodgeHeight -= dodgeSpeed;
+            //    transform.Translate(Vector2.up*dodgeSpeed*Time.deltaTime);
+            //}
+            //else
+            //{
+            //    dodgeHeight = GetComponent<Renderer>().bounds.size.y*100;
+            //    isDodging = false;
+            //}
             isDodging = false;
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0,5),ForceMode2D.Impulse);
+
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 3), ForceMode2D.Impulse);
         }
     }
 
     public void Explode()
     {
+        string s = coinText.text;
+        int coinNum = int.Parse(coinText.text);
+        coinNum += coins;
+        coinText.text = coinNum.ToString();
         Instantiate(Resources.Load("Prefabs/MobDie"), transform.position, transform.rotation);
         //gameObject.SetActive(false);
         //Destroy(gameObject);
@@ -144,20 +173,14 @@ public class Enemy : Character
                     if (currentHealth <= 0)
                     {
                         isDying = true;
+
                         GetComponent<Animator>().SetTrigger("die");
                     }
                 }
             }
         }
     }
-
-    //void OnTriggerStay2D(Collider2D other)
-    //{
-    //    if (other.tag=="Edge")
-    //    {
-    //        currentState.OnTriggerEnter(other);
-    //    }
-    //}
+    
     void OnParticleCollision(GameObject other)
     {
         float distance = Vector3.Distance(other.transform.position, transform.position);

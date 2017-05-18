@@ -6,7 +6,8 @@ public class MachineGunBullet : Bullet
     public float bulletSpeed;
     public float damage;
     public float coolDown = 0.2f;
-    public float pushIntensity = 5;
+    public float pushDistance;
+    public float countsOfUnitDistance = 3;
 
     // Use this for initialization
     void Awake ()
@@ -19,6 +20,7 @@ public class MachineGunBullet : Bullet
 	    {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(1, 0) * bulletSpeed, ForceMode2D.Impulse);
         }
+        pushDistance = GetComponent<Renderer>().bounds.size.x * countsOfUnitDistance;
     }
 
     // Update is called once per frame

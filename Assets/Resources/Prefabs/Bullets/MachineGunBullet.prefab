@@ -87,9 +87,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 23
-  damage: 1
+  damage: 3
   coolDown: 0.2
-  pushIntensity: 0
+  pushDistance: 0
+  countsOfUnitDistance: 3
 --- !u!212 &21210740
 SpriteRenderer:
   m_ObjectHideFlags: 1

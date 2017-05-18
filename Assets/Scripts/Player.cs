@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Player : Character {
     public float arielSpeed = 3f;
-    public float jumpHeight;
+    public float jumpHeight=6;
     public bool isGrounded;
     public Transform foot;
     public float groundCheckRadius;
@@ -16,6 +16,10 @@ public class Player : Character {
     public bool isBeingPushed;
     public float pushedDistance;
     private bool isPushedToRight;
+    public float pushedSpeed = 10;
+    public float jumpedHeight = 0;
+    [SerializeField]
+    private float jumpSpeed = 5;
     // Use this for initialization
     public override void Start ()
     {
@@ -35,20 +39,45 @@ public class Player : Character {
             invincibleTimer = invincibleTime;
         }
         isGrounded = Physics2D.OverlapCircle(foot.transform.position, groundCheckRadius, ground);
+        if (isGrounded)
+        {
+            jumpedHeight = 0;
+        }
         base.FixedUpdate();
         DetectInputs();
         if (isBeingPushed)
         {
-            isBeingPushed = false;
-            Debug.Log(pushedDistance);
-            if (isPushedToRight)
+            //Debug.Log(pushedDistance);
+            if (pushedDistance > 0)
             {
-
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(pushedDistance, 0), ForceMode2D.Impulse);
+                pushedDistance -= pushedSpeed * Time.deltaTime;
+                
+                if (isPushedToRight)
+                {
+                    if (!Input.GetKey(KeyCode.A))
+                    {
+                        transform.Translate(Vector2.right * pushedSpeed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        transform.Translate(Vector2.right * pushedSpeed *0.5f* Time.deltaTime);
+                    }
+                }
+                else
+                {
+                    if (!Input.GetKey(KeyCode.D))
+                    {
+                        transform.Translate(Vector2.left * pushedSpeed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        transform.Translate(Vector2.left * pushedSpeed * 0.5f* Time.deltaTime);
+                    }
+                }
             }
             else
             {
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(-pushedDistance, 0), ForceMode2D.Impulse);
+                isBeingPushed = false;
             }
         }
     }
@@ -62,8 +91,8 @@ public class Player : Character {
             Instantiate(Resources.Load("Prefabs/PlayerDie"),gameObject.transform.position, Quaternion.Euler(new Vector3(270, 0, 0)));
             Destroy(gameObject);
         }
-        
     }
+    
 
     private void DetectInputs()
     {
@@ -112,14 +141,19 @@ public class Player : Character {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
         }
 
-        if (Input.GetAxis("Jump") > 0 && isGrounded)
+        if (Input.GetKey(KeyCode.W))
         {
             //AddForce BUG: ONLY BEHAVE THE SAME WHEN CALLED IN FIXED UPDATE
             //GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpHeight);
+            //GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpHeight);
+            //if (jumpedHeight <= jumpHeight)
+            //{
+                //jumpedHeight += jumpSpeed * Time.deltaTime;
+                transform.Translate(Vector2.up * jumpSpeed * Time.deltaTime);
+            //}
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && coolDownTimer <= 0)
+        if (Input.GetKey(KeyCode.Space) && coolDownTimer <= 0)
         {
             Attack();
         }
@@ -159,13 +193,13 @@ public class Player : Character {
                 if (other.tag == "EnemyMelee")
                 {
                     Instantiate(Resources.Load("Prefabs/PlayerHittedByMelee"), transform.position, transform.rotation);
-                    pushedDistance = other.GetComponentInParent<Enemy>().meleePushIntensity;
+                    pushedDistance = other.GetComponentInParent<Enemy>().meleePushDistance;
                     isPushedToRight = other.GetComponentInParent<Enemy>().isFacingRight;
                     currentHealth -= other.transform.parent.GetComponent<Enemy>().meleeDamage;
                 }
                 else
                 {
-                    pushedDistance = other.GetComponent<MachineGunBullet>().pushIntensity;
+                    pushedDistance = other.GetComponent<MachineGunBullet>().pushDistance;
                     isPushedToRight = other.GetComponent<Rigidbody2D>().velocity.x > 0;
                     currentHealth -= other.GetComponent<MachineGunBullet>().damage;
                 }

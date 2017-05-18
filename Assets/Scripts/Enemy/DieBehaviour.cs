@@ -21,6 +21,7 @@ public class DieBehaviour : StateMachineBehaviour
         {
             //animator.gameObject.SetActive(true);
             animator.GetComponent<Enemy>().isDying = false;
+            animator.GetComponent<Enemy>().healthBarUI.fillAmount = 1;
             animator.SetTrigger("isResurrected");
             animator.GetComponent<Enemy>().Start();
         }
