@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : Character {
@@ -20,11 +21,18 @@ public class Player : Character {
     public float jumpedHeight = 0;
     [SerializeField]
     private float jumpSpeed = 5;
+    public Text weaponCooldownText;
+
     // Use this for initialization
     public override void Start ()
     {
         base.Start();
         healthBarUI = GameObject.Find("PlayerStats/HealthBarBG/Health").GetComponent<Image>();
+        if (SceneManager.GetActiveScene().name == "Scene2")
+        {
+            weaponCooldownText = GameObject.Find("PlayerStats/CooldownTime").GetComponent<Text>();
+        }
+
         invincibleTimer = invincibleTime;
     }
     public override void FixedUpdate()
@@ -80,6 +88,8 @@ public class Player : Character {
                 isBeingPushed = false;
             }
         }
+        if (SceneManager.GetActiveScene().name == "Scene2")
+            weaponCooldownText.text = coolDownTimer.ToString();
     }
 
     // Update is called once per frame
@@ -148,8 +158,18 @@ public class Player : Character {
             //GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpHeight);
             //if (jumpedHeight <= jumpHeight)
             //{
-                //jumpedHeight += jumpSpeed * Time.deltaTime;
+            //jumpedHeight += jumpSpeed * Time.deltaTime;
+            if (SceneManager.GetActiveScene().name != "Scene2")
+            {
                 transform.Translate(Vector2.up * jumpSpeed * Time.deltaTime);
+            }
+            else
+            {
+                if (isGrounded)
+                {
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpHeight);
+                }
+            }
             //}
         }
 
@@ -199,9 +219,17 @@ public class Player : Character {
                 }
                 else
                 {
-                    pushedDistance = other.GetComponent<MachineGunBullet>().pushDistance;
-                    isPushedToRight = other.GetComponent<Rigidbody2D>().velocity.x > 0;
-                    currentHealth -= other.GetComponent<MachineGunBullet>().damage;
+                    if (SceneManager.GetActiveScene().name == "Scene2")
+                    {
+                        currentHealth -= other.GetComponent<AerialEnemyBullet>().damage;
+                        GameObject.Destroy(other.gameObject);
+                    }
+                    else
+                    {
+                        pushedDistance = other.GetComponent<MachineGunBullet>().pushDistance;
+                        isPushedToRight = other.GetComponent<Rigidbody2D>().velocity.x > 0;
+                        currentHealth -= other.GetComponent<MachineGunBullet>().damage;
+                    }
                 }
                 
                 healthBarUI.fillAmount = currentHealth / maxHealth;

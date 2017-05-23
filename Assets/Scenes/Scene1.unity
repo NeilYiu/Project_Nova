@@ -1678,6 +1678,7 @@ MonoBehaviour:
   pushedSpeed: 5
   jumpedHeight: 0
   jumpSpeed: 10
+  weaponCooldownText: {fileID: 0}
 --- !u!68 &657217018
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -3737,6 +3738,7 @@ GameObject:
   - 4: {fileID: 1109360265}
   - 68: {fileID: 1109360266}
   - 114: {fileID: 1109360267}
+  - 114: {fileID: 1109360268}
   m_Layer: 0
   m_Name: Sword
   m_TagString: PlayerMelee
@@ -3790,6 +3792,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
+--- !u!114 &1109360268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1109360264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b10451bb310bcf54c90118092feef5c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  others:
+  - {fileID: 6138966, guid: 4326b04591862a748af8a8fe031d52a2, type: 2}
+  - {fileID: 6138966, guid: aea211e3655bdc64e9831bdd79e4af35, type: 2}
 --- !u!1 &1124426800
 GameObject:
   m_ObjectHideFlags: 0

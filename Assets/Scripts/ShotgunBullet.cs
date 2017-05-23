@@ -20,6 +20,6 @@ public class ShotgunBullet : Bullet {
     
     // Update is called once per frame
     void Update () {
-	
+	    
 	}
 }

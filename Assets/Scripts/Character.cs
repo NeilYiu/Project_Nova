@@ -2,6 +2,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public abstract class Character : MonoBehaviour {
     public float speed = 5f;
@@ -22,6 +24,7 @@ public abstract class Character : MonoBehaviour {
     public EdgeCollider2D meleeCollider;
     [SerializeField]
     public List<string> damageSource;
+
     public static Player Instance
     {
         get { return instance ?? (instance = GameObject.FindObjectOfType<Player>()); }
@@ -32,7 +35,10 @@ public abstract class Character : MonoBehaviour {
     {
         meleeCollider.enabled = false;
         currentHealth = maxHealth;
-        coolDown = bullet.GetComponent<MachineGunBullet>().coolDown;
+        if (SceneManager.GetActiveScene().name != "Scene2")
+        {
+            coolDown = bullet.GetComponent<MachineGunBullet>().coolDown;
+        }
         isFacingRight = transform.localScale.x > 0;
     }
 
@@ -64,14 +70,55 @@ public abstract class Character : MonoBehaviour {
     public virtual void ChangeDirection()
     {
         isFacingRight = !isFacingRight;
-        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        if (SceneManager.GetActiveScene().name != "Scene2")
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            
+        }
+        //GameObject gun = transform.FindChild("Gun").gameObject;
+        //gun.transform.eulerAngles = new Vector3(gun.transform.eulerAngles.x, gun.transform.eulerAngles.y, gun.transform.eulerAngles.z);
     }
 
     //Shoot the bullet after attack
     public void Shoot()
     {
-        if (!isMelee)
+        if (SceneManager.GetActiveScene().name != "Scene2")
         {
+            if (!isMelee)
+            {
+                if (isFacingRight)
+                {
+                    if (isUsingShotgun)
+                    {
+                        Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 90, 0)));
+                    }
+                    else
+                    {
+                        Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+                    }
+                }
+                else
+                {
+                    if (isUsingShotgun)
+                    {
+                        Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(180, 90, 0)));
+                    }
+                    else
+                    {
+                        Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+                    }
+                }
+            }
+        }
+        else
+        {
+            bullet.GetComponent<SelfDestruction>().life = 100;
+            bullet.GetComponent<MachineGunBullet>().shootDirection =
+                transform.FindChild("Gun").GetComponent<Gun>().shootDirection;
+            bullet.transform.rotation = transform.FindChild("Gun").transform.rotation;
             if (isFacingRight)
             {
                 if (isUsingShotgun)
@@ -91,7 +138,7 @@ public abstract class Character : MonoBehaviour {
                 }
                 else
                 {
-                    Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+                    Instantiate(bullet, gun.position, Quaternion.Euler(new Vector3(0, 0, 0)));
                 }
             }
         }
@@ -101,7 +148,14 @@ public abstract class Character : MonoBehaviour {
     {
         GetComponent<Animator>().SetTrigger("attack");
         coolDownTimer = coolDown;
-        gun.transform.localPosition = new Vector3(0.18f, gun.transform.localPosition.y,
-               gun.transform.localPosition.z);
+        if (SceneManager.GetActiveScene().name != "Scene2")
+        {
+            gun.transform.localPosition = new Vector3(0.18f, gun.transform.localPosition.y,
+                gun.transform.localPosition.z);
+        }
+        else
+        {
+            
+        }
     }
 }
