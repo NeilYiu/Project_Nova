@@ -135,7 +135,7 @@ public class Enemy : Character
 
     public void Explode()
     {
-        string s = coinText.text;
+
         int coinNum = int.Parse(coinText.text);
         coinNum += coins;
         coinText.text = coinNum.ToString();
