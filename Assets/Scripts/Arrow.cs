@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
-public class Obstacle : MonoBehaviour {
-
-    //public float currentDistance = 0;
+public class Arrow : MonoBehaviour
+{
     public float speed = 2;
-    public int life = 3;
+    public float life = 3;
     public int coins = 10;
     public SpawnEnemy spawnEnemy;
     public bool isPlayerAlive = true;
@@ -18,13 +16,18 @@ public class Obstacle : MonoBehaviour {
         currentLife = life;
     }
 
+    void Awake()
+    {
+        
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (isPlayerAlive)
         {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
-            
+
             if (currentLife > 0)
             {
                 currentLife -= Time.deltaTime;
@@ -32,7 +35,7 @@ public class Obstacle : MonoBehaviour {
             else
             {
                 currentLife = life;
-                GameObject.Find("EnemyManager/SpawnPos1").GetComponent<SpawnPos>().activeEnemies.Remove(gameObject);
+                GameObject.Find("EnemyManager/SpawnPos2").GetComponent<SpawnPos>().activeEnemies.Remove(gameObject);
                 Destroy(gameObject);
             }
         }
@@ -40,10 +43,10 @@ public class Obstacle : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag=="Player")
+        if (other.tag == "Player")
         {
             GameObject.Find("GameManager").GetComponent<ForestManager>().isPlayerAlive = false;
-            GameObject.Destroy(other.gameObject);
+            Destroy(other.gameObject);
         }
     }
 }
