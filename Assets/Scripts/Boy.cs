@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Boy : MonoBehaviour {
     public float arielSpeed = 3f;
@@ -19,7 +20,9 @@ public class Boy : MonoBehaviour {
     public bool isInvincible = false;
     public float invincibleTime = 10f;
     public float invincibleTimer;
-
+    //public bool canAerialMove = false;
+    //public float aerialMoveTime;
+    public float aerialMoveTimer;
     // Use this for initialization
     void Start()
     {
@@ -37,10 +40,49 @@ public class Boy : MonoBehaviour {
             invincibleTimer = invincibleTime;
         }
         isGrounded = Physics2D.OverlapCircle(foot.transform.position, groundCheckRadius, ground);
-        
-        DetectInputs();
+
+        if (aerialMoveTimer > 0)
+        {
+            aerialMoveTimer -= Time.deltaTime;
+            DetectAerialInputs();
+        }
+        else
+        {
+            DetectInputs();
+        }
     }
-   
+
+    void DetectAerialInputs()
+    {
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            if (isGrounded)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-speed, GetComponent<Rigidbody2D>().velocity.y);
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-arielSpeed, GetComponent<Rigidbody2D>().velocity.y);
+            }
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            if (isGrounded)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(speed, GetComponent<Rigidbody2D>().velocity.y);
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(arielSpeed, GetComponent<Rigidbody2D>().velocity.y);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

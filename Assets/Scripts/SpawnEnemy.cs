@@ -31,6 +31,12 @@ public class SpawnEnemy : MonoBehaviour
 
                     if (pos.gameObject.name == "SpawnPos2")
                         enemy.GetComponent<Arrow>().isPlayerAlive = false;
+
+                    if (pos.gameObject.name == "SpawnPos3")
+                        enemy.GetComponent<Megalith>().isPlayerAlive = false;
+
+                    if (pos.gameObject.name == "SpawnPos4")
+                        enemy.GetComponent<Bat>().isPlayerAlive = false;
                 }
             }
         }
@@ -46,6 +52,12 @@ public class SpawnEnemy : MonoBehaviour
 
                     if (pos.gameObject.name == "SpawnPos2")
                         enemy.GetComponent<Arrow>().isPlayerAlive = true;
+
+                    if (pos.gameObject.name == "SpawnPos3")
+                        enemy.GetComponent<Megalith>().isPlayerAlive = true;
+
+                    if (pos.gameObject.name == "SpawnPos4")
+                        enemy.GetComponent<Bat>().isPlayerAlive = true;
                 }
             }
             isStopped = false;

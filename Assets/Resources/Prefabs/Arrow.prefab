@@ -40,11 +40,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588426887c5012647b6ad9446958416a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 40
+  speed: 50
   life: 3
   coins: 10
   spawnEnemy: {fileID: 0}
   isPlayerAlive: 1
+  currentLife: 0
 --- !u!212 &21265380
 SpriteRenderer:
   m_ObjectHideFlags: 1

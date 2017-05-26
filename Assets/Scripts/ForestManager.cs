@@ -11,12 +11,17 @@ public class ForestManager : MonoBehaviour
     public SpawnEnemy spawnEnemy;
     public bool isPlayerAlive = true;
     public bool isStopped = false;
+    public GameObject player;
+    public BuffManager buffManager;
 	// Use this for initialization
 	void Start ()
 	{
 	    spawnEnemy = GameObject.Find("EnemyManager").GetComponent<SpawnEnemy>();
-	    gameOverText = GameObject.Find("Canvas/GameOverText").GetComponent<Text>();
+        buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
+
+        gameOverText = GameObject.Find("Canvas/GameOverText").GetComponent<Text>();
         gameOverText2 = GameObject.Find("Canvas/GameOverText/Text").GetComponent<Text>();
+        player = GameObject.FindWithTag("Player");
         gameOverText.enabled = false;
 	    gameOverText2.enabled = false;
         sceneL = GameObject.Find("SceneL");
@@ -25,7 +30,16 @@ public class ForestManager : MonoBehaviour
 
     // Update is called once per frame
     void Update () {
-	    if (!isPlayerAlive)
+        if (player != null)
+        {
+            if (player.transform.position.x < -70.0f)
+            {
+                isPlayerAlive = false;
+                Destroy(player);
+            }
+        }
+
+        if (!isPlayerAlive)
 	    {
 	        if (!isStopped)
 	        {
@@ -35,16 +49,19 @@ public class ForestManager : MonoBehaviour
                 gameOverText2.enabled = true;
                 gameOverText.enabled = true;
                 spawnEnemy.isPlayerAlive = false;
-            }
+	            buffManager.isPlayerAlive = false;
+	        }
 	        
 	        if (Input.GetKeyDown(KeyCode.Space))
 	        {
                 spawnEnemy.isPlayerAlive = true;
+	            buffManager.isPlayerAlive = true;
                 isStopped = false;
                 Instantiate(Resources.Load("Prefabs/Boy"), transform.position, transform.rotation) ;
 	            isPlayerAlive = true;
                 gameOverText.enabled = false;
                 gameOverText2.enabled = false;
+                player = GameObject.FindWithTag("Player");
                 sceneL.GetComponent<Scroll>().canScroll = true;
                 sceneR.GetComponent<Scroll>().canScroll = true;
             }
