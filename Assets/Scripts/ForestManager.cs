@@ -16,7 +16,7 @@ public class ForestManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	    spawnEnemy = GameObject.Find("EnemyManager").GetComponent<SpawnEnemy>();
+        spawnEnemy = GameObject.Find("EnemyManager").GetComponent<SpawnEnemy>();
         buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
 
         gameOverText = GameObject.Find("Canvas/GameOverText").GetComponent<Text>();
@@ -49,13 +49,13 @@ public class ForestManager : MonoBehaviour
                 gameOverText2.enabled = true;
                 gameOverText.enabled = true;
                 spawnEnemy.isPlayerAlive = false;
-	            buffManager.isPlayerAlive = false;
+                buffManager.isPlayerAlive = false;
 	        }
 	        
 	        if (Input.GetKeyDown(KeyCode.Space))
 	        {
                 spawnEnemy.isPlayerAlive = true;
-	            buffManager.isPlayerAlive = true;
+                buffManager.isPlayerAlive = true;
                 isStopped = false;
                 Instantiate(Resources.Load("Prefabs/Boy"), transform.position, transform.rotation) ;
 	            isPlayerAlive = true;

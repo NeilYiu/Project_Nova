@@ -35,7 +35,9 @@ public class MoveForwardBuff : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-
+            other.gameObject.transform.Translate(Vector2.right*20);
+            GameObject.Find("BuffManager/BuffPos2").GetComponent<BuffPos>().activeBuffs.Remove(gameObject);
+            Destroy(gameObject);
         }
     }
 }

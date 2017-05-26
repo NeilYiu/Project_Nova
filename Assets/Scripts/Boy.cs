@@ -77,9 +77,9 @@ public class Boy : MonoBehaviour {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(arielSpeed, GetComponent<Rigidbody2D>().velocity.y);
             }
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpHeight);
         }
     }
 

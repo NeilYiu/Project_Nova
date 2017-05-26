@@ -35,9 +35,8 @@ public class AerialMovementBuff : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            //other.GetComponent<Boy>().canAerialMove = true;
-            //other.GetComponent<Boy>().aerialMoveTime = 10;
             other.GetComponent<Boy>().aerialMoveTimer = 10f;
+            GameObject.Find("BuffManager/BuffPos1").GetComponent<BuffPos>().activeBuffs.Remove(gameObject);
             Destroy(gameObject);
         }
     }

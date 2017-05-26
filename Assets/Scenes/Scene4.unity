@@ -575,8 +575,8 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 187166, guid: b786382a23636c840ac178bb2d8a3486, type: 2}
   coolDownTimer: 0
-  maxCoolDown: 4
-  minCoolDown: 2
+  maxCoolDown: 9
+  minCoolDown: 5
   activeEnemies: []
   isPlayerAlive: 1
   isStopped: 0
@@ -807,8 +807,8 @@ MonoBehaviour:
   buffPrefabs:
   - {fileID: 178712, guid: 5226a5b3c462342489bb908488243e95, type: 2}
   coolDownTimer: 0
-  maxCoolDown: 2
-  minCoolDown: 1
+  maxCoolDown: 15
+  minCoolDown: 6
   activeBuffs: []
   isPlayerAlive: 1
   isStopped: 0
@@ -819,7 +819,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1215840730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6, y: 3.5, z: 0}
+  m_LocalPosition: {x: -1.6, y: -11.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 454028779}
@@ -1435,6 +1435,14 @@ Prefab:
       propertyPath: jumpHeight
       value: 55
       objectReference: {fileID: 0}
+    - target: {fileID: 11493308, guid: 09982e95244c7c540928667711aed3cf, type: 2}
+      propertyPath: arielSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493308, guid: 09982e95244c7c540928667711aed3cf, type: 2}
+      propertyPath: speed
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 09982e95244c7c540928667711aed3cf, type: 2}
   m_IsPrefabParent: 0
@@ -1584,8 +1592,8 @@ MonoBehaviour:
   buffPrefabs:
   - {fileID: 104180, guid: 021841dd757b48c4887199207fccb211, type: 2}
   coolDownTimer: 0
-  maxCoolDown: 4
-  minCoolDown: 3
+  maxCoolDown: 12
+  minCoolDown: 5
   activeBuffs: []
   isPlayerAlive: 1
   isStopped: 0
@@ -1596,7 +1604,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2082614260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.3, z: 0}
+  m_LocalPosition: {x: 0, y: -11.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 454028779}

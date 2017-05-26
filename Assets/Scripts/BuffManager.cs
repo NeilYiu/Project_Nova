@@ -5,7 +5,7 @@ public class BuffManager : MonoBehaviour
 {
     public GameObject[] buffPos;
     public bool isPlayerAlive = true;
-    public bool isStopped = false;
+    public bool isStopped;
 
     // Use this for initialization
     void Start () {
