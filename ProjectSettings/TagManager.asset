@@ -14,6 +14,10 @@ TagManager:
   - EnemyMelee
   - EnemySight
   - EnemyTorso
+  - Bat
+  - Arrow
+  - Obstacle
+  - Megalith
   layers:
   - Default
   - TransparentFX

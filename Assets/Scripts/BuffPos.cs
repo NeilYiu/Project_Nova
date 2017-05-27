@@ -26,6 +26,12 @@ public class BuffPos : MonoBehaviour {
 
                 if (buff.GetComponent<MoveForwardBuff>())
                     buff.GetComponent<MoveForwardBuff>().isPlayerAlive = false;
+
+                if (buff.GetComponent<ProtectionBuff>())
+                    buff.GetComponent<ProtectionBuff>().isPlayerAlive = false;
+
+                if (buff.GetComponent<AxeBuff>())
+                    buff.GetComponent<AxeBuff>().isPlayerAlive = false;
             }
         }
 
@@ -56,6 +62,21 @@ public class BuffPos : MonoBehaviour {
                         buff.GetComponent<AerialMovementBuff>().isPlayerAlive = true;
                     }
                 }
+                if (buff.gameObject.name == "ProtectionBuff")
+                {
+                    if (buff.GetComponent<ProtectionBuff>().isPlayerAlive == false)
+                    {
+                        buff.GetComponent<ProtectionBuff>().isPlayerAlive = true;
+                    }
+                }
+
+                if (buff.gameObject.name == "AxeBuff")
+                {
+                    if (buff.GetComponent<AxeBuff>().isPlayerAlive == false)
+                    {
+                        buff.GetComponent<AxeBuff>().isPlayerAlive = true;
+                    }
+                }
             }
             isStopped = false;
         }
@@ -66,9 +87,9 @@ public class BuffPos : MonoBehaviour {
     {
         if (isPlayerAlive)
         {
-            foreach (GameObject enemy in buffPrefabs)
+            foreach (GameObject buff in buffPrefabs)
             {
-                GameObject temp = GameObject.Instantiate(enemy, transform.position, Quaternion.identity) as GameObject;
+                GameObject temp = GameObject.Instantiate(buff, transform.position, Quaternion.identity) as GameObject;
                 activeBuffs.Add(temp);
             }
         }

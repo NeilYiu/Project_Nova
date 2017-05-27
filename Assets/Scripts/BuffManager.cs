@@ -27,6 +27,12 @@ public class BuffManager : MonoBehaviour
 
                     if (pos.gameObject.name == "BuffPos2")
                         buff.GetComponent<MoveForwardBuff>().isPlayerAlive = false;
+
+                    if (pos.gameObject.name == "BuffPos3")
+                        buff.GetComponent<ProtectionBuff>().isPlayerAlive = false;
+
+                    if (pos.gameObject.name == "BuffPos4")
+                        buff.GetComponent<AxeBuff>().isPlayerAlive = false;
                 }
             }
         }
@@ -42,7 +48,12 @@ public class BuffManager : MonoBehaviour
 
                     if (pos.gameObject.name == "BuffPos2")
                         buff.GetComponent<MoveForwardBuff>().isPlayerAlive = true;
-                   
+
+                    if (pos.gameObject.name == "BuffPos3")
+                        buff.GetComponent<ProtectionBuff>().isPlayerAlive = true;
+
+                    if (pos.gameObject.name == "BuffPos4")
+                        buff.GetComponent<AxeBuff>().isPlayerAlive = true;
                 }
             }
             isStopped = false;

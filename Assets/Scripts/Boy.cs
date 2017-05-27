@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Timers;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Boy : MonoBehaviour {
     public float arielSpeed = 3f;
@@ -18,27 +20,39 @@ public class Boy : MonoBehaviour {
     public bool isMelee;
     public bool isTakingDamage;
     public bool isInvincible = false;
-    public float invincibleTime = 10f;
     public float invincibleTimer;
+    public Text invincibleTimeText;
+    public Text buffTypeText;
+    public Text axeCount;
+    public float axeCoolDown = 0.1f;
     //public bool canAerialMove = false;
     //public float aerialMoveTime;
     public float aerialMoveTimer;
     // Use this for initialization
     void Start()
     {
-        
+        invincibleTimeText = GameObject.Find("Canvas/BuffTime").GetComponent<Text>();
+        buffTypeText = GameObject.Find("Canvas/BuffType").GetComponent<Text>();
+        axeCount = GameObject.Find("Canvas/AxeCount").GetComponent<Text>();
     }
     void FixedUpdate()
     {
+        if (axeCoolDown>0)
+        {
+            axeCoolDown -= Time.deltaTime;
+        }
         if (isInvincible)
         {
             invincibleTimer -= Time.deltaTime;
+            invincibleTimeText.text = invincibleTimer.ToString();
         }
         if (invincibleTimer <= 0)
         {
+            invincibleTimeText.text = "";
+            buffTypeText.text = "";
             isInvincible = false;
-            invincibleTimer = invincibleTime;
         }
+
         isGrounded = Physics2D.OverlapCircle(foot.transform.position, groundCheckRadius, ground);
 
         if (aerialMoveTimer > 0)
@@ -49,6 +63,16 @@ public class Boy : MonoBehaviour {
         else
         {
             DetectInputs();
+        }
+
+        if (int.Parse(axeCount.text)>0)
+        {
+            if (Input.GetKey(KeyCode.RightShift)&&axeCoolDown<=0)
+            {
+                axeCoolDown = 0.3f;
+                axeCount.text = (int.Parse(axeCount.text) - 1).ToString();
+                Instantiate(Resources.Load("Prefabs/Axe"),transform.position, Quaternion.identity);
+            }
         }
     }
 

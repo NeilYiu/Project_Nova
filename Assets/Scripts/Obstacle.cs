@@ -40,7 +40,7 @@ public class Obstacle : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag=="Player")
+        if (other.tag=="Player" && !other.gameObject.GetComponent<Boy>().isInvincible)
         {
             GameObject.Find("GameManager").GetComponent<ForestManager>().isPlayerAlive = false;
             GameObject.Destroy(other.gameObject);

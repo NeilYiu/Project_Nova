@@ -11,11 +11,17 @@ public class Bat : MonoBehaviour {
     public float maxHeight = 10f;
     public float minHeight = -8f;
     public bool isMovingUp = false;
+    public Boy boy;
     // Use this for initialization
     void Start()
     {
         spawnEnemy = GameObject.Find("EnemyManager").GetComponent<SpawnEnemy>();
         currentLife = life;
+        boy = GameObject.FindWithTag("Player").gameObject.GetComponent<Boy>();
+        if (GameObject.FindWithTag("Player").gameObject.GetComponent<Boy>().isInvincible)
+        {
+            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), GameObject.FindWithTag("Player").gameObject.GetComponent<BoxCollider2D>(), true);
+        }
     }
 
     // Update is called once per frame
@@ -56,10 +62,11 @@ public class Bat : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && !other.gameObject.GetComponent<Boy>().isInvincible)
         {
             GameObject.Find("GameManager").GetComponent<ForestManager>().isPlayerAlive = false;
             Destroy(other.gameObject);
         }
+        
     }
 }

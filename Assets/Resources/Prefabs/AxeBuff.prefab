@@ -1,90 +1,70 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &142126
+--- !u!1 &132084
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 426994}
-  - 212: {fileID: 21205582}
-  - 114: {fileID: 11483372}
-  - 50: {fileID: 5002460}
-  - 61: {fileID: 6159144}
-  m_Layer: 8
-  m_Name: Megalith
-  m_TagString: Megalith
+  - 4: {fileID: 442276}
+  - 212: {fileID: 21210862}
+  - 114: {fileID: 11481582}
+  - 61: {fileID: 6122436}
+  m_Layer: 0
+  m_Name: AxeBuff
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &426994
+--- !u!4 &442276
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 142126}
+  m_GameObject: {fileID: 132084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7, y: 11, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!50 &5002460
-Rigidbody2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 142126}
-  m_UseAutoMass: 0
-  m_Mass: 10
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &6159144
+--- !u!61 &6122436
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 142126}
+  m_GameObject: {fileID: 132084}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
---- !u!114 &11483372
+--- !u!114 &11481582
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 142126}
+  m_GameObject: {fileID: 132084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9baf7a799b4109940bcbd96f31fc1ea4, type: 3}
+  m_Script: {fileID: 11500000, guid: 14c74ab654a9e6d4aaa23538c8df3a96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  life: 6
-  coins: 10
-  spawnEnemy: {fileID: 0}
+  life: 3
   isPlayerAlive: 1
   currentLife: 0
---- !u!212 &21205582
+--- !u!212 &21210862
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 142126}
+  m_GameObject: {fileID: 132084}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -105,8 +85,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2a1f1b31e74a735478aa92d9773bf97d, type: 3}
-  m_Color: {r: 0.4852941, g: 0.21410035, b: 0.21410035, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7269514e347ca5640b66492f479e6101, type: 3}
+  m_Color: {r: 0.61764705, g: 0.15441176, b: 0.15441176, a: 1}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!1001 &100100000
@@ -118,5 +98,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 142126}
+  m_RootGameObject: {fileID: 132084}
   m_IsPrefabParent: 1
