@@ -15,12 +15,15 @@ public class Boy : MonoBehaviour {
     [SerializeField]
     private float jumpSpeed = 5;
     public float speed = 5f;
-    public float maxHealth = 10;
+    public float maxHealth = 5;
     public float currentHealth;
     public bool isMelee;
     public bool isTakingDamage;
     public bool isInvincible = false;
     public float invincibleTimer;
+    public Text aerialMovementTimeText;
+    public Text aerialMovementTypeText;
+
     public Text invincibleTimeText;
     public Text buffTypeText;
     public Text axeCount;
@@ -32,8 +35,10 @@ public class Boy : MonoBehaviour {
     void Start()
     {
         invincibleTimeText = GameObject.Find("Canvas/BuffTime").GetComponent<Text>();
-        buffTypeText = GameObject.Find("Canvas/BuffType").GetComponent<Text>();
+        //buffTypeText = GameObject.Find("Canvas/BuffType").GetComponent<Text>();
         axeCount = GameObject.Find("Canvas/AxeCount").GetComponent<Text>();
+        aerialMovementTimeText = GameObject.Find("Canvas/AerialMoementTime").GetComponent<Text>();
+        aerialMovementTypeText = GameObject.Find("Canvas/AerialMoementBuff").GetComponent<Text>();
     }
     void FixedUpdate()
     {
@@ -44,20 +49,26 @@ public class Boy : MonoBehaviour {
         if (isInvincible)
         {
             invincibleTimer -= Time.deltaTime;
-            invincibleTimeText.text = invincibleTimer.ToString();
+            invincibleTimeText.text = invincibleTimer.ToString("F2");
         }
         if (invincibleTimer <= 0)
         {
-            invincibleTimeText.text = "";
-            buffTypeText.text = "";
+            invincibleTimeText.text = "0";
             isInvincible = false;
         }
+
+        if (aerialMoveTimer <= 0)
+        {
+            aerialMovementTimeText.text = "0";
+        }
+        
 
         isGrounded = Physics2D.OverlapCircle(foot.transform.position, groundCheckRadius, ground);
 
         if (aerialMoveTimer > 0)
         {
             aerialMoveTimer -= Time.deltaTime;
+            aerialMovementTimeText.text = aerialMoveTimer.ToString("F2");
             DetectAerialInputs();
         }
         else
@@ -67,7 +78,7 @@ public class Boy : MonoBehaviour {
 
         if (int.Parse(axeCount.text)>0)
         {
-            if (Input.GetKey(KeyCode.RightShift)&&axeCoolDown<=0)
+            if (Input.GetKey(KeyCode.M) && axeCoolDown<=0)
             {
                 axeCoolDown = 0.3f;
                 axeCount.text = (int.Parse(axeCount.text) - 1).ToString();
@@ -79,7 +90,7 @@ public class Boy : MonoBehaviour {
     void DetectAerialInputs()
     {
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && transform.position.x <= 3)
         {
             if (isGrounded)
             {
@@ -90,7 +101,7 @@ public class Boy : MonoBehaviour {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(-arielSpeed, GetComponent<Rigidbody2D>().velocity.y);
             }
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) && transform.position.x <= 3)
         {
             if (isGrounded)
             {
@@ -112,6 +123,7 @@ public class Boy : MonoBehaviour {
     {
         if (currentHealth <= 0)
         {
+            GameObject.Find("GameManager").GetComponent<ForestManager>().isPlayerAlive = false;
             Instantiate(Resources.Load("Prefabs/PlayerDie"), gameObject.transform.position, Quaternion.Euler(new Vector3(270, 0, 0)));
             Destroy(gameObject);
         }

@@ -11,7 +11,8 @@ GameObject:
   - 212: {fileID: 21205582}
   - 114: {fileID: 11483372}
   - 50: {fileID: 5002460}
-  - 61: {fileID: 6159144}
+  - 68: {fileID: 6813346}
+  - 61: {fileID: 6147766}
   m_Layer: 8
   m_Name: Megalith
   m_TagString: Megalith
@@ -26,8 +27,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142126}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7, y: 11, z: 1}
+  m_LocalPosition: {x: -3.8, y: -13.98, z: 0}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -39,7 +40,7 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142126}
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 50
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -47,8 +48,8 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &6159144
+  m_Constraints: 6
+--- !u!61 &6147766
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -61,7 +62,51 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.87, y: 3.59}
+--- !u!68 &6813346
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142126}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: f51285372899f344ea3e404586af9675, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: -2.3963912, y: -3.731575}
+  - {x: -2.5294518, y: -3.3370876}
+  - {x: -2.416947, y: -2.310098}
+  - {x: -2.4840608, y: -1.2742392}
+  - {x: -2.2358973, y: -0.39705276}
+  - {x: -2.1588404, y: 0.3758208}
+  - {x: -2.045997, y: 1.1090786}
+  - {x: -1.7743317, y: 1.9935179}
+  - {x: -1.4784685, y: 2.474121}
+  - {x: -1.0190947, y: 2.8011813}
+  - {x: -0.4432551, y: 2.991255}
+  - {x: -0.41783172, y: 3.4306598}
+  - {x: -0.44862428, y: 3.8702297}
+  - {x: -0.8227682, y: 4.1712456}
+  - {x: -0.5123949, y: 4.9735703}
+  - {x: 0.27288118, y: 4.995877}
+  - {x: 0.32684803, y: 3.8974888}
+  - {x: 0.8966986, y: 3.8574567}
+  - {x: 1.2929184, y: 3.851455}
+  - {x: 1.4872948, y: 3.4479394}
+  - {x: 1.077315, y: 3.4663486}
+  - {x: 0.8384641, y: 3.357655}
+  - {x: 0.727636, y: 2.9749298}
+  - {x: 1.3674672, y: 2.6010418}
+  - {x: 1.9012911, y: 1.8181736}
+  - {x: 1.9040457, y: 0.9325409}
+  - {x: 2.055235, y: -0.16596794}
+  - {x: 2.3014593, y: -1.526343}
+  - {x: 2.2863913, y: -2.4079576}
+  - {x: 2.5670753, y: -3.7943482}
+  - {x: -2.319468, y: -3.7732804}
 --- !u!114 &11483372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -74,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  life: 6
+  life: 8
   coins: 10
   spawnEnemy: {fileID: 0}
   isPlayerAlive: 1
@@ -104,9 +149,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2a1f1b31e74a735478aa92d9773bf97d, type: 3}
-  m_Color: {r: 0.4852941, g: 0.21410035, b: 0.21410035, a: 1}
+  m_SortingOrder: -98
+  m_Sprite: {fileID: 21300000, guid: 14e5895db1fb6c94f89985a81b873865, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!1001 &100100000

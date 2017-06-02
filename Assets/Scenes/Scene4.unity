@@ -523,6 +523,7 @@ MonoBehaviour:
   leftEdge: -233
   rightEdge: 407
   canScroll: 1
+  scrollSpeedIncrement: 0.1
 --- !u!4 &296098683
 Transform:
   m_ObjectHideFlags: 0
@@ -904,6 +905,7 @@ MonoBehaviour:
   isStopped: 0
   player: {fileID: 0}
   buffManager: {fileID: 0}
+  distanceText: {fileID: 0}
 --- !u!1 &1012732477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,6 +1362,8 @@ MonoBehaviour:
   - {fileID: 1963747022}
   isPlayerAlive: 1
   isStopped: 0
+  minSpawnInterval: 1
+  hasSpawned: 0
 --- !u!4 &1473137051
 Transform:
   m_ObjectHideFlags: 0
@@ -1588,6 +1592,7 @@ MonoBehaviour:
   leftEdge: -233
   rightEdge: 407
   canScroll: 1
+  scrollSpeedIncrement: 0.1
 --- !u!4 &1791167534
 Transform:
   m_ObjectHideFlags: 0

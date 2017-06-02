@@ -39,14 +39,19 @@ public class ProtectionBuff : MonoBehaviour {
         {
             other.gameObject.GetComponent<Boy>().isInvincible = true;
             other.gameObject.GetComponent<Boy>().invincibleTimer = 10f;
-            List<GameObject> activeBats =
-                GameObject.Find("EnemyManager/SpawnPos4").gameObject.GetComponent<SpawnPos>().activeEnemies;
-            foreach (GameObject bat in activeBats)
+
+            if (GameObject.Find("EnemyManager/SpawnPos4")!=null)
             {
-                Physics2D.IgnoreCollision(bat.gameObject.GetComponent<BoxCollider2D>(),other.gameObject.GetComponent<BoxCollider2D>(),true);
+                List<GameObject> activeBats =
+                GameObject.Find("EnemyManager/SpawnPos4").gameObject.GetComponent<SpawnPos>().activeEnemies;
+                foreach (GameObject bat in activeBats)
+                {
+                    Physics2D.IgnoreCollision(bat.gameObject.GetComponent<BoxCollider2D>(), other.gameObject.GetComponent<BoxCollider2D>(), true);
+                }
+                //GameObject.Find("Canvas/BuffType").GetComponent<Text>().text = "Invincible:";
+                GameObject.Find("Canvas/BuffTime").GetComponent<Text>().text = "10";
             }
-            GameObject.Find("Canvas/BuffType").GetComponent<Text>().text = "Invincible:";
-            GameObject.Find("Canvas/BuffTime").GetComponent<Text>().text = "10";
+           
 
             GameObject.Find("BuffManager/BuffPos3").GetComponent<BuffPos>().activeBuffs.Remove(gameObject);
             Destroy(gameObject);

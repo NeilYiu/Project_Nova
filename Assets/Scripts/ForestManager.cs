@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ForestManager : MonoBehaviour
@@ -13,12 +16,16 @@ public class ForestManager : MonoBehaviour
     public bool isStopped = false;
     public GameObject player;
     public BuffManager buffManager;
+    public Text distanceText;
+    private AsyncOperation ao;
+    private bool isLoading; 
+
 	// Use this for initialization
 	void Start ()
 	{
         spawnEnemy = GameObject.Find("EnemyManager").GetComponent<SpawnEnemy>();
         buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
-
+	    distanceText = GameObject.Find("Canvas/DistanceNumber").GetComponent<Text>();
         gameOverText = GameObject.Find("Canvas/GameOverText").GetComponent<Text>();
         gameOverText2 = GameObject.Find("Canvas/GameOverText/Text").GetComponent<Text>();
         player = GameObject.FindWithTag("Player");
@@ -30,8 +37,36 @@ public class ForestManager : MonoBehaviour
 
     // Update is called once per frame
     void Update () {
+        
         if (player != null)
         {
+            float distanceRemained = float.Parse(distanceText.text) - Time.deltaTime;
+
+            if (distanceRemained > 0)
+            {
+                distanceText.text = distanceRemained.ToString("F2");
+            }
+            else if(!isLoading)
+            {
+                DontDestroyOnLoad(GameObject.Find("LoadingManager"));
+
+                if (SceneManager.GetActiveScene().name == "Level1")
+                {
+                    GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level2";
+                    SceneManager.LoadScene("Loading2");
+                }
+                if (SceneManager.GetActiveScene().name == "Level2")
+                {
+                    GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level3";
+                    SceneManager.LoadScene("Loading3");
+                }
+                if (SceneManager.GetActiveScene().name == "Level3")
+                {
+                    GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level4";
+                    SceneManager.LoadScene("Loading4");
+                }
+            }
+
             if (player.transform.position.x < -70.0f)
             {
                 isPlayerAlive = false;
@@ -41,7 +76,7 @@ public class ForestManager : MonoBehaviour
 
         if (!isPlayerAlive)
 	    {
-	        if (!isStopped)
+            if (!isStopped)
 	        {
 	            isStopped = true;
                 sceneL.GetComponent<Scroll>().canScroll = false;
@@ -54,6 +89,14 @@ public class ForestManager : MonoBehaviour
 	        
 	        if (Input.GetKeyDown(KeyCode.Space))
 	        {
+                if (SceneManager.GetActiveScene().name == "Level4")
+                {
+                    DontDestroyOnLoad(GameObject.Find("LoadingManager"));
+                    DontDestroyOnLoad(gameObject);
+                    GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level4";
+                    SceneManager.LoadScene("Loading4");
+                }
+
                 spawnEnemy.isPlayerAlive = true;
                 buffManager.isPlayerAlive = true;
                 isStopped = false;
@@ -62,6 +105,8 @@ public class ForestManager : MonoBehaviour
                 gameOverText.enabled = false;
                 gameOverText2.enabled = false;
                 player = GameObject.FindWithTag("Player");
+	            player.GetComponent<Boy>().currentHealth = 5;
+                GameObject.Find("Canvas/CurrentHealth").GetComponent<Text>().text = "5";
                 sceneL.GetComponent<Scroll>().canScroll = true;
                 sceneR.GetComponent<Scroll>().canScroll = true;
             }

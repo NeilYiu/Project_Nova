@@ -11,9 +11,11 @@ public class SpawnPos : MonoBehaviour {
     public List<GameObject> activeEnemies = new List<GameObject>();
     public bool isPlayerAlive = true;
     public bool isStopped = false;
+    private SpawnEnemy spawnEnemy;
     // Use this for initialization
     void Start () {
         coolDownTimer = Random.Range(minCoolDown, maxCoolDown);
+        spawnEnemy = GameObject.Find("EnemyManager").GetComponent<SpawnEnemy>();
     }
 	
 	// Update is called once per frame
@@ -71,9 +73,26 @@ public class SpawnPos : MonoBehaviour {
         {
             foreach (GameObject enemy in enemyPrefabs)
             {
-                GameObject temp = GameObject.Instantiate(enemy, transform.position, Quaternion.identity) as GameObject;
-                activeEnemies.Add(temp);
+                //if (!spawnEnemy.hasSpawned)
+                //{
+                    activeEnemies.Add(GameObject.Instantiate(enemy, transform.position, Quaternion.identity) as GameObject);
+                    spawnEnemy.hasSpawned = true;
+                //}
             }
         }
     }
+
+    //IEnumerator TrySpawn(GameObject enemy)
+    //{
+    //    if (spawnEnemy.hasSpawned)
+    //    {
+    //        yield return new WaitForSeconds(0.3f);
+    //    }
+    //    else
+    //    {
+    //        StopCoroutine(TrySpawn(null));
+    //        activeEnemies.Add(GameObject.Instantiate(enemy, transform.position, Quaternion.identity) as GameObject);
+    //        spawnEnemy.hasSpawned = true;
+    //    }
+    //}
 }

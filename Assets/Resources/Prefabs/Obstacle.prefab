@@ -25,8 +25,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.7, y: -15.5, z: 0}
-  m_LocalScale: {x: 8, y: 5, z: 1}
+  m_LocalPosition: {x: -29.2, y: -19.3, z: 0}
+  m_LocalScale: {x: 1.5, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -55,12 +55,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de7e863a718d43e45a2288a1e016a06f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  life: 3
+  speed: 23
+  life: 14
   coins: 10
   spawnEnemy: {fileID: 0}
   isPlayerAlive: 1
   currentLife: 0
+  verticalSpeed: 5
+  isMovingUp: 0
 --- !u!212 &21275104
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -86,8 +88,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -99
-  m_Sprite: {fileID: 21300000, guid: efbf192d14ce8e144b62fad65be01603, type: 3}
+  m_SortingOrder: -96
+  m_Sprite: {fileID: 21300000, guid: eafdec2e1caf234408488af64d67a934, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

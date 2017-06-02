@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Net.Mime;
+using UnityEngine.UI;
 
 public class Arrow : MonoBehaviour
 {
@@ -45,8 +47,10 @@ public class Arrow : MonoBehaviour
     {
         if (other.tag == "Player" && !other.gameObject.GetComponent<Boy>().isInvincible)
         {
-            GameObject.Find("GameManager").GetComponent<ForestManager>().isPlayerAlive = false;
-            Destroy(other.gameObject);
+            //GameObject.Find("GameManager").GetComponent<ForestManager>().isPlayerAlive = false;
+            other.gameObject.GetComponent<Boy>().currentHealth -= 1;
+            GameObject.Find("Canvas/CurrentHealth").GetComponent<Text>().text = (int.Parse(GameObject.Find("Canvas/CurrentHealth").GetComponent<Text>().text) - 1).ToString();
+            //Destroy(gameObject);
         }
     }
 }

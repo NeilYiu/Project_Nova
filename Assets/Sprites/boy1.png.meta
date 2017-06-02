@@ -43,7 +43,7 @@ TextureImporter:
   cubemapConvolutionSteps: 7
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -2
+  textureFormat: -3
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
@@ -61,7 +61,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 7
+  spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
@@ -78,14 +78,12 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -17, y: 34.5}
-        - {x: -24, y: 25.5}
-        - {x: -24, y: -29.5}
-        - {x: -17, y: -34.5}
-        - {x: 19, y: -34.5}
-        - {x: 24, y: -12.5}
-        - {x: 24, y: 33.5}
-        - {x: 23, y: 34.5}
+      - - {x: -19, y: 34.5}
+        - {x: -24, y: 32.5}
+        - {x: -24, y: -34.5}
+        - {x: 13, y: -34.5}
+        - {x: 24, y: -28.5}
+        - {x: 24, y: 34.5}
     - name: boy1_1
       rect:
         serializedVersion: 2
@@ -97,15 +95,11 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -18, y: 34}
-        - {x: -24, y: 28}
-        - {x: -24, y: -28}
-        - {x: -18, y: -32}
-        - {x: -13, y: -34}
-        - {x: 7, y: -34}
-        - {x: 24, y: -12}
-        - {x: 24, y: 27}
-        - {x: 19, y: 34}
+      - - {x: -24, y: 34}
+        - {x: -24, y: -34}
+        - {x: 15, y: -34}
+        - {x: 24, y: -25}
+        - {x: 24, y: 34}
     - name: boy1_2
       rect:
         serializedVersion: 2
@@ -117,16 +111,12 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 24, y: 25.5}
-        - {x: 20, y: 33.5}
-        - {x: -15, y: 33.5}
-        - {x: -24, y: 25.5}
-        - {x: -24, y: -29.5}
-        - {x: -17, y: -33.5}
-        - {x: 2, y: -33.5}
-        - {x: 6, y: -28.5}
-        - {x: 23, y: -9.5}
-        - {x: 24, y: -8.5}
+      - - {x: -24, y: 33.5}
+        - {x: -24, y: -16.5}
+        - {x: -22, y: -33.5}
+        - {x: 5, y: -33.5}
+        - {x: 24, y: -13.5}
+        - {x: 24, y: 33.5}
     - name: boy1_3
       rect:
         serializedVersion: 2
@@ -138,12 +128,15 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -24, y: 34.5}
-        - {x: -24, y: -34.5}
-        - {x: 3, y: -34.5}
-        - {x: 15, y: -27.5}
-        - {x: 24, y: -15.5}
-        - {x: 24, y: 34.5}
+      - - {x: 20, y: 34.5}
+        - {x: -17, y: 34.5}
+        - {x: -24, y: 24.5}
+        - {x: -24, y: -10.5}
+        - {x: -22, y: -34.5}
+        - {x: 2, y: -34.5}
+        - {x: 23, y: -19.5}
+        - {x: 24, y: -14.5}
+        - {x: 24, y: 32.5}
     - name: boy1_4
       rect:
         serializedVersion: 2
@@ -155,12 +148,14 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -24, y: 34}
+      - - {x: 18, y: 34}
+        - {x: -18, y: 34}
+        - {x: -24, y: 31}
         - {x: -24, y: -34}
-        - {x: 12, y: -34}
-        - {x: 24, y: -8}
-        - {x: 24, y: 32}
-        - {x: 22, y: 34}
+        - {x: -2, y: -34}
+        - {x: 6, y: -29}
+        - {x: 24, y: -10}
+        - {x: 24, y: 30}
     - name: boy1_5
       rect:
         serializedVersion: 2
@@ -172,13 +167,13 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -14, y: 34}
-        - {x: -24, y: 30}
-        - {x: -24, y: -29}
-        - {x: -23, y: -34}
-        - {x: 15, y: -34}
-        - {x: 24, y: -17}
-        - {x: 24, y: 34}
+      - - {x: -18, y: 34}
+        - {x: -24, y: 27}
+        - {x: -24, y: -34}
+        - {x: 5, y: -34}
+        - {x: 24, y: -15}
+        - {x: 24, y: 32}
+        - {x: 18, y: 34}
     - name: boy1_6
       rect:
         serializedVersion: 2
@@ -191,13 +186,13 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -15, y: 33}
-        - {x: -24, y: 25}
-        - {x: -24, y: -27}
-        - {x: -21, y: -33}
-        - {x: 17, y: -33}
-        - {x: 24, y: -13}
-        - {x: 24, y: 32}
-        - {x: 21, y: 33}
+        - {x: -24, y: 26}
+        - {x: -24, y: -32}
+        - {x: -23, y: -33}
+        - {x: 10, y: -33}
+        - {x: 24, y: -8}
+        - {x: 24, y: 26}
+        - {x: 16, y: 33}
     - name: boy1_7
       rect:
         serializedVersion: 2
@@ -209,13 +204,14 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -24, y: 33.5}
+      - - {x: -17, y: 33.5}
+        - {x: -24, y: 30.5}
         - {x: -24, y: -32.5}
-        - {x: -23, y: -33.5}
-        - {x: 7, y: -33.5}
-        - {x: 24, y: -14.5}
-        - {x: 24, y: 31.5}
-        - {x: 16, y: 33.5}
+        - {x: -22, y: -33.5}
+        - {x: 9, y: -33.5}
+        - {x: 24, y: -10.5}
+        - {x: 24, y: 27.5}
+        - {x: 21, y: 33.5}
     - name: boy1_8
       rect:
         serializedVersion: 2
@@ -227,14 +223,14 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 21, y: 34.5}
-        - {x: -18, y: 34.5}
-        - {x: -24, y: 32.5}
-        - {x: -24, y: -30.5}
-        - {x: -19, y: -34.5}
-        - {x: 8, y: -34.5}
-        - {x: 24, y: -5.5}
-        - {x: 24, y: 28.5}
+      - - {x: -15, y: 34.5}
+        - {x: -24, y: 26.5}
+        - {x: -24, y: -29.5}
+        - {x: -16, y: -34.5}
+        - {x: 10, y: -34.5}
+        - {x: 24, y: -11.5}
+        - {x: 24, y: 27.5}
+        - {x: 15, y: 34.5}
     - name: boy1_9
       rect:
         serializedVersion: 2
@@ -247,12 +243,12 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -21, y: 33.5}
-        - {x: -24, y: 31.5}
+        - {x: -24, y: 32.5}
         - {x: -24, y: -30.5}
-        - {x: -18, y: -33.5}
-        - {x: 4, y: -33.5}
-        - {x: 24, y: -12.5}
-        - {x: 24, y: 30.5}
+        - {x: -21, y: -33.5}
+        - {x: 5, y: -33.5}
+        - {x: 24, y: -11.5}
+        - {x: 24, y: 31.5}
         - {x: 23, y: 33.5}
     - name: boy1_10
       rect:
@@ -265,12 +261,14 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -24, y: 33.5}
-        - {x: -24, y: -26.5}
-        - {x: -21, y: -33.5}
-        - {x: 5, y: -33.5}
-        - {x: 24, y: -5.5}
-        - {x: 24, y: 33.5}
+      - - {x: -21, y: 33.5}
+        - {x: -24, y: 30.5}
+        - {x: -24, y: -31.5}
+        - {x: -22, y: -33.5}
+        - {x: 11, y: -33.5}
+        - {x: 24, y: -8.5}
+        - {x: 24, y: 32.5}
+        - {x: 19, y: 33.5}
     - name: boy1_11
       rect:
         serializedVersion: 2
@@ -282,15 +280,14 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -23, y: 34.5}
-        - {x: -24, y: 31.5}
-        - {x: -24, y: -24.5}
-        - {x: -19, y: -34.5}
-        - {x: 1, y: -34.5}
-        - {x: 3, y: -33.5}
-        - {x: 24, y: -8.5}
+      - - {x: -22, y: 34.5}
+        - {x: -24, y: 32.5}
+        - {x: -24, y: -14.5}
+        - {x: -21, y: -34.5}
+        - {x: 3, y: -34.5}
+        - {x: 24, y: -9.5}
         - {x: 24, y: 32.5}
-        - {x: 22, y: 34.5}
+        - {x: 20, y: 34.5}
     - name: boy1_12
       rect:
         serializedVersion: 2
@@ -302,15 +299,13 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -12, y: 34}
-        - {x: -24, y: 23}
-        - {x: -24, y: -6}
-        - {x: -21, y: -31}
-        - {x: -20, y: -34}
-        - {x: 14, y: -34}
-        - {x: 24, y: -10}
-        - {x: 24, y: 31}
-        - {x: 18, y: 34}
+      - - {x: -18, y: 34}
+        - {x: -24, y: 30}
+        - {x: -24, y: -32}
+        - {x: -23, y: -34}
+        - {x: 17, y: -34}
+        - {x: 24, y: -16}
+        - {x: 24, y: 34}
     - name: boy1_13
       rect:
         serializedVersion: 2
@@ -322,14 +317,11 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 15, y: 34}
-        - {x: -15, y: 34}
-        - {x: -24, y: 29}
+      - - {x: -24, y: 34}
         - {x: -24, y: -34}
-        - {x: 1, y: -34}
-        - {x: 4, y: -31}
-        - {x: 24, y: -8}
-        - {x: 24, y: 25}
+        - {x: 15, y: -34}
+        - {x: 24, y: -15}
+        - {x: 24, y: 34}
     - name: boy1_14
       rect:
         serializedVersion: 2
@@ -341,11 +333,15 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -24, y: 33}
-        - {x: -24, y: -33}
-        - {x: 11, y: -33}
-        - {x: 24, y: -15}
-        - {x: 24, y: 33}
+      - - {x: 16, y: 33}
+        - {x: -22, y: 33}
+        - {x: -24, y: 26}
+        - {x: -24, y: -30}
+        - {x: -23, y: -33}
+        - {x: 7, y: -33}
+        - {x: 9, y: -31}
+        - {x: 24, y: -8}
+        - {x: 24, y: 26}
     - name: boy1_15
       rect:
         serializedVersion: 2
@@ -357,12 +353,13 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -21, y: 33.5}
-        - {x: -24, y: 32.5}
-        - {x: -24, y: -33.5}
-        - {x: 18, y: -33.5}
-        - {x: 24, y: -13.5}
-        - {x: 24, y: 33.5}
+      - - {x: -24, y: 33.5}
+        - {x: -24, y: -30.5}
+        - {x: -21, y: -33.5}
+        - {x: 10, y: -33.5}
+        - {x: 24, y: -12.5}
+        - {x: 24, y: 31.5}
+        - {x: 17, y: 33.5}
     - name: boy1_16
       rect:
         serializedVersion: 2
@@ -374,11 +371,14 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -24, y: 34.5}
-        - {x: -24, y: -34.5}
-        - {x: 7, y: -34.5}
-        - {x: 24, y: -17.5}
-        - {x: 24, y: 29.5}
+      - - {x: -14, y: 34.5}
+        - {x: -24, y: 25.5}
+        - {x: -24, y: -29.5}
+        - {x: -22, y: -33.5}
+        - {x: -16, y: -34.5}
+        - {x: 8, y: -34.5}
+        - {x: 24, y: -12.5}
+        - {x: 24, y: 31.5}
         - {x: 23, y: 34.5}
     outline: []
   spritePackingTag: 

@@ -3,15 +3,20 @@ using System.Collections;
 
 public class Axe : MonoBehaviour {
     public float speed=10f;
-    public float rotationSpeed=-1f;
+    public float rotationSpeed=1f;
+    public GameObject player;
+    public Vector2 vertex = new Vector2(20.0f,20.0f);
 	// Use this for initialization
 	void Start () {
-	    
+	    player = GameObject.FindWithTag("Player");
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        transform.Translate(Vector2.right * speed * Time.deltaTime,Space.World);
+	void Update ()
+	{
+	    //float deltaX = speed * Time.deltaTime;
+	    //float deltaY = Mathf.Pow(deltaX - player.transform.position.x - vertex.x,2);
+        transform.Translate(Vector2.right*speed*Time.deltaTime,Space.World);
         transform.Rotate(new Vector3(0,0,rotationSpeed));
 	}
 

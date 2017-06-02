@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Bat : MonoBehaviour {
     public float speed = 2;
@@ -62,11 +63,17 @@ public class Bat : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        //if (other.tag == "Player" && !other.gameObject.GetComponent<Boy>().isInvincible)
+        //{
+        //    GameObject.Find("GameManager").GetComponent<ForestManager>().isPlayerAlive = false;
+        //    Destroy(other.gameObject);
+        //}
         if (other.tag == "Player" && !other.gameObject.GetComponent<Boy>().isInvincible)
         {
-            GameObject.Find("GameManager").GetComponent<ForestManager>().isPlayerAlive = false;
-            Destroy(other.gameObject);
+            //GameObject.Find("GameManager").GetComponent<ForestManager>().isPlayerAlive = false;
+            other.gameObject.GetComponent<Boy>().currentHealth -= 1;
+            GameObject.Find("Canvas/CurrentHealth").GetComponent<Text>().text = (int.Parse(GameObject.Find("Canvas/CurrentHealth").GetComponent<Text>().text)-1).ToString();
+            //Destroy(gameObject);
         }
-        
     }
 }

@@ -20,9 +20,14 @@ public class Megalith : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        //if (transform.position.y<=-17f)
+        //{
+        //    GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
+        //}
         if (isPlayerAlive)
         {
-            transform.Translate(Vector2.left * speed * Time.deltaTime);
+
+            transform.Translate(Vector2.left * -GameObject.Find("SceneL").GetComponent<Scroll>().scrollSpeed);
 
             if (currentLife > 0)
             {
