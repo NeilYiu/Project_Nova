@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Net.Mime;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Arrow : MonoBehaviour
@@ -49,7 +50,8 @@ public class Arrow : MonoBehaviour
         {
             //GameObject.Find("GameManager").GetComponent<ForestManager>().isPlayerAlive = false;
             other.gameObject.GetComponent<Boy>().currentHealth -= 1;
-            GameObject.Find("Canvas/CurrentHealth").GetComponent<Text>().text = (int.Parse(GameObject.Find("Canvas/CurrentHealth").GetComponent<Text>().text) - 1).ToString();
+            if (SceneManager.GetActiveScene().name == "Level4")
+                GameObject.Find("Canvas/CurrentHealth").GetComponent<Text>().text = (int.Parse(GameObject.Find("Canvas/CurrentHealth").GetComponent<Text>().text) - 1).ToString();
             //Destroy(gameObject);
         }
     }

@@ -258,7 +258,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Aerial movement:'
+  m_Text: 'Movement buff:'
 --- !u!222 &91788019
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -782,7 +782,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 187166, guid: b786382a23636c840ac178bb2d8a3486, type: 2}
   coolDownTimer: 0
-  maxCoolDown: 15
+  maxCoolDown: 13
   minCoolDown: 8
   activeEnemies: []
   isPlayerAlive: 1
@@ -1459,7 +1459,7 @@ MonoBehaviour:
   buffPrefabs:
   - {fileID: 178712, guid: 5226a5b3c462342489bb908488243e95, type: 2}
   coolDownTimer: 0
-  maxCoolDown: 13
+  maxCoolDown: 14
   minCoolDown: 6
   activeBuffs: []
   isPlayerAlive: 1
@@ -1756,7 +1756,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 181398, guid: 69b86789e696ea44892e10b45695b17d, type: 2}
   coolDownTimer: 0
-  maxCoolDown: 12
+  maxCoolDown: 10
   minCoolDown: 6
   activeEnemies: []
   isPlayerAlive: 1
@@ -2155,7 +2155,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 142126, guid: 1f9aaeb09d66f6a46a64a81ab8acc33c, type: 2}
   coolDownTimer: 0
-  maxCoolDown: 8
+  maxCoolDown: 7
   minCoolDown: 4
   activeEnemies: []
   isPlayerAlive: 1
@@ -2352,7 +2352,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 172606, guid: 40c97112bb7db1549ac6d5cf097ca52d, type: 2}
   coolDownTimer: 0
-  maxCoolDown: 14
+  maxCoolDown: 12
   minCoolDown: 6
   activeEnemies: []
   isPlayerAlive: 1

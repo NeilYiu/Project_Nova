@@ -89,27 +89,65 @@ public class ForestManager : MonoBehaviour
 	        
 	        if (Input.GetKeyDown(KeyCode.Space))
 	        {
-                if (SceneManager.GetActiveScene().name == "Level4")
-                {
-                    DontDestroyOnLoad(GameObject.Find("LoadingManager"));
-                    DontDestroyOnLoad(gameObject);
-                    GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level4";
-                    SceneManager.LoadScene("Loading4");
+	            if (SceneManager.GetActiveScene().name == "Level4")
+	            {
+	                DontDestroyOnLoad(GameObject.Find("LoadingManager"));
+	                //DontDestroyOnLoad(gameObject);
+	                GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level4";
+	                SceneManager.LoadScene("Loading4");
+	            }
+	            else
+	            {
+                    spawnEnemy.isPlayerAlive = true;
+                    buffManager.isPlayerAlive = true;
+                    isStopped = false;
+                    Instantiate(Resources.Load("Prefabs/Boy"), transform.position, transform.rotation);
+                    isPlayerAlive = true;
+                    gameOverText.enabled = false;
+                    gameOverText2.enabled = false;
+                    player = GameObject.FindWithTag("Player");
+	                if (SceneManager.GetActiveScene().name == "Level4")
+	                {
+	                    player.GetComponent<Boy>().currentHealth = 5;
+	                    GameObject.Find("Canvas/CurrentHealth").GetComponent<Text>().text = "5";
+	                }
+	                else
+	                {
+                        player.GetComponent<Boy>().currentHealth = 1;
+                    }
+                    sceneL.GetComponent<Scroll>().canScroll = true;
+                    sceneR.GetComponent<Scroll>().canScroll = true;
                 }
-
-                spawnEnemy.isPlayerAlive = true;
-                buffManager.isPlayerAlive = true;
-                isStopped = false;
-                Instantiate(Resources.Load("Prefabs/Boy"), transform.position, transform.rotation) ;
-	            isPlayerAlive = true;
-                gameOverText.enabled = false;
-                gameOverText2.enabled = false;
-                player = GameObject.FindWithTag("Player");
-	            player.GetComponent<Boy>().currentHealth = 5;
-                GameObject.Find("Canvas/CurrentHealth").GetComponent<Text>().text = "5";
-                sceneL.GetComponent<Scroll>().canScroll = true;
-                sceneR.GetComponent<Scroll>().canScroll = true;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            DontDestroyOnLoad(GameObject.Find("LoadingManager"));
+            //DontDestroyOnLoad(gameObject);
+            GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level1";
+            SceneManager.LoadScene("Loading");
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            DontDestroyOnLoad(GameObject.Find("LoadingManager"));
+            //DontDestroyOnLoad(gameObject);
+            GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level2";
+            SceneManager.LoadScene("Loading2");
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            DontDestroyOnLoad(GameObject.Find("LoadingManager"));
+            //DontDestroyOnLoad(gameObject);
+            GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level3";
+            SceneManager.LoadScene("Loading3");
+        }
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            DontDestroyOnLoad(GameObject.Find("LoadingManager"));
+            //DontDestroyOnLoad(gameObject);
+            GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level4";
+            SceneManager.LoadScene("Loading4");
         }
     }
 }

@@ -409,7 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf53a994f745bb4a86293040d2bd57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: -0.2
+  scrollSpeed: -0.3
   leftEdge: -232
   rightEdge: 406.12
   canScroll: 1
@@ -494,7 +494,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Aerial movement:'
+  m_Text: 'Movement buff:'
 --- !u!222 &310930593
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1513,9 +1513,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '1
-
-'
+  m_Text: 50
 --- !u!222 &1242679313
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2022,7 +2020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf53a994f745bb4a86293040d2bd57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: -0.2
+  scrollSpeed: -0.3
   leftEdge: -232
   rightEdge: 406.12
   canScroll: 1

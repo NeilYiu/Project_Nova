@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Boy : MonoBehaviour {
-    public float arielSpeed = 3f;
     public float jumpHeight = 6;
     public bool isGrounded;
     public Transform foot;
@@ -90,27 +89,13 @@ public class Boy : MonoBehaviour {
     void DetectAerialInputs()
     {
 
-        if (Input.GetKey(KeyCode.A) && transform.position.x <= 3)
+        if (Input.GetKey(KeyCode.A))
         {
-            if (isGrounded)
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-speed, GetComponent<Rigidbody2D>().velocity.y);
-            }
-            else
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-arielSpeed, GetComponent<Rigidbody2D>().velocity.y);
-            }
+            GetComponent<Rigidbody2D>().velocity = new Vector2(-speed, GetComponent<Rigidbody2D>().velocity.y);
         }
         else if (Input.GetKey(KeyCode.D) && transform.position.x <= 3)
         {
-            if (isGrounded)
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(speed, GetComponent<Rigidbody2D>().velocity.y);
-            }
-            else
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(arielSpeed, GetComponent<Rigidbody2D>().velocity.y);
-            }
+            GetComponent<Rigidbody2D>().velocity = new Vector2(speed, GetComponent<Rigidbody2D>().velocity.y);
         }
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {

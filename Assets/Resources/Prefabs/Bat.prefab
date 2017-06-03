@@ -73,8 +73,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3eca594c3bdcb44ea2a451a622d93c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  life: 3
+  speed: 20
+  life: 7
   coins: 10
   spawnEnemy: {fileID: 0}
   isPlayerAlive: 1
