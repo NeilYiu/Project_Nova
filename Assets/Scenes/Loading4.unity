@@ -409,7 +409,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Limited health, try your best to finish the distance
+  m_Text: Try your best to finish the distance
 --- !u!222 &239611152
 CanvasRenderer:
   m_ObjectHideFlags: 0

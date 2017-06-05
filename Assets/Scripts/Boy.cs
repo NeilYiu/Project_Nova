@@ -38,7 +38,9 @@ public class Boy : MonoBehaviour {
         axeCount = GameObject.Find("Canvas/AxeCount").GetComponent<Text>();
         aerialMovementTimeText = GameObject.Find("Canvas/AerialMoementTime").GetComponent<Text>();
         aerialMovementTypeText = GameObject.Find("Canvas/AerialMoementBuff").GetComponent<Text>();
+        currentHealth = 5;
     }
+
     void FixedUpdate()
     {
         if (axeCoolDown>0)
@@ -88,7 +90,6 @@ public class Boy : MonoBehaviour {
 
     void DetectAerialInputs()
     {
-
         if (Input.GetKey(KeyCode.A))
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(-speed, GetComponent<Rigidbody2D>().velocity.y);
@@ -99,6 +100,7 @@ public class Boy : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
+            GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Sound/Jump"),0.6f);
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpHeight);
         }
     }
@@ -120,6 +122,7 @@ public class Boy : MonoBehaviour {
         {
             //AddForce BUG: ONLY BEHAVE THE SAME WHEN CALLED IN FIXED UPDATE
             //GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
+            GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>("Sound/Jump"), 0.6f);
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpHeight);
         }
     }
