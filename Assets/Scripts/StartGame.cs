@@ -16,12 +16,7 @@ public class StartGame : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	    if (GetComponent<AudioSource>().clip!=null && !GetComponent<AudioSource>().isPlaying)
-	    {
-            GetComponent<AudioSource>().Play();
-        }
-
-        if (SceneManager.GetActiveScene().name.Contains("Level"))
+	    if (SceneManager.GetActiveScene().name.Contains("Level"))
 	        return;
 
         if (startText == null )
@@ -49,42 +44,30 @@ public class StartGame : MonoBehaviour
 	    {
             DontDestroyOnLoad(GameObject.Find("LoadingManager"));
             DontDestroyOnLoad(gameObject);
-            GetComponent<AudioSource>().Stop();
-            if (SceneManager.GetActiveScene().name == "Loading")
-            {
-                GetComponent<AudioSource>().clip = (AudioClip)Resources.Load("Sound/TutorialLevels");
-            }
-            if (SceneManager.GetActiveScene().name == "Loading2")
-            {
-                GetComponent<AudioSource>().clip = (AudioClip)Resources.Load("Sound/TutorialLevels");
-            }
-            if (SceneManager.GetActiveScene().name == "Loading3")
-            {
-                GetComponent<AudioSource>().clip = (AudioClip)Resources.Load("Sound/Level3");
-            }
-            if (SceneManager.GetActiveScene().name == "Loading4")
-            {
-                GetComponent<AudioSource>().clip = (AudioClip)Resources.Load("Sound/Level4");
-            }
 
-            if (SceneManager.GetActiveScene().name == "StartScene")
+	        if (SceneManager.GetActiveScene().name == "StartScene")
 	        {
+                GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level1";
                 SceneManager.LoadScene("Loading");
             }
             if (SceneManager.GetActiveScene().name == "Loading")
             {
+                GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level1";
                 SceneManager.LoadScene("Level1");
             }
             if (SceneManager.GetActiveScene().name == "Loading2")
             {
+                GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level1";
                 SceneManager.LoadScene("Level2");
             }
             if (SceneManager.GetActiveScene().name == "Loading3")
             {
+                GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level1";
                 SceneManager.LoadScene("Level3");
             }
             if (SceneManager.GetActiveScene().name == "Loading4")
             {
+                GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level1";
                 SceneManager.LoadScene("Level4");
             }
         }

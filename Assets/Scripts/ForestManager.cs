@@ -18,12 +18,11 @@ public class ForestManager : MonoBehaviour
     public BuffManager buffManager;
     public Text distanceText;
     private AsyncOperation ao;
-    private bool isLoading;
-    private string currentLevel;
+    private bool isLoading; 
+
 	// Use this for initialization
 	void Start ()
 	{
-	    currentLevel = SceneManager.GetActiveScene().name;
         spawnEnemy = GameObject.Find("EnemyManager").GetComponent<SpawnEnemy>();
         buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
 	    distanceText = GameObject.Find("Canvas/DistanceNumber").GetComponent<Text>();
@@ -38,6 +37,7 @@ public class ForestManager : MonoBehaviour
 
     // Update is called once per frame
     void Update () {
+        
         if (player != null)
         {
             float distanceRemained = float.Parse(distanceText.text) - Time.deltaTime;
@@ -86,7 +86,7 @@ public class ForestManager : MonoBehaviour
                 spawnEnemy.isPlayerAlive = false;
                 buffManager.isPlayerAlive = false;
 	        }
-
+	        
 	        if (Input.GetKeyDown(KeyCode.Space))
 	        {
 	            if (SceneManager.GetActiveScene().name == "Level4")
@@ -96,51 +96,29 @@ public class ForestManager : MonoBehaviour
 	                GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level4";
 	                SceneManager.LoadScene("Loading4");
 	            }
-                if (SceneManager.GetActiveScene().name == "Level1")
-                {
-                    DontDestroyOnLoad(GameObject.Find("LoadingManager"));
-                    //DontDestroyOnLoad(gameObject);
-                    GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level4";
-                    SceneManager.LoadScene("Loading");
-                }
-                if (SceneManager.GetActiveScene().name == "Level2")
-                {
-                    DontDestroyOnLoad(GameObject.Find("LoadingManager"));
-                    //DontDestroyOnLoad(gameObject);
-                    GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level4";
-                    SceneManager.LoadScene("Loading2");
-                }
-                if (SceneManager.GetActiveScene().name == "Level3")
-                {
-                    DontDestroyOnLoad(GameObject.Find("LoadingManager"));
-                    //DontDestroyOnLoad(gameObject);
-                    GameObject.Find("LoadingManager").GetComponent<LoadingManager>().levelName = "Level4";
-                    SceneManager.LoadScene("Loading3");
+	            else
+	            {
+                    spawnEnemy.isPlayerAlive = true;
+                    buffManager.isPlayerAlive = true;
+                    isStopped = false;
+                    Instantiate(Resources.Load("Prefabs/Boy"), transform.position, transform.rotation);
+                    isPlayerAlive = true;
+                    gameOverText.enabled = false;
+                    gameOverText2.enabled = false;
+                    player = GameObject.FindWithTag("Player");
+	                if (SceneManager.GetActiveScene().name == "Level4")
+	                {
+	                    player.GetComponent<Boy>().currentHealth = 5;
+	                    GameObject.Find("Canvas/CurrentHealth").GetComponent<Text>().text = "5";
+	                }
+	                else
+	                {
+                        player.GetComponent<Boy>().currentHealth = 1;
+                    }
+                    sceneL.GetComponent<Scroll>().canScroll = true;
+                    sceneR.GetComponent<Scroll>().canScroll = true;
                 }
             }
-	        //else
-            //{
-            //       spawnEnemy.isPlayerAlive = true;
-            //       buffManager.isPlayerAlive = true;
-            //       isStopped = false;
-            //       Instantiate(Resources.Load("Prefabs/Boy"), transform.position, transform.rotation);
-            //       isPlayerAlive = true;
-            //       gameOverText.enabled = false;
-            //       gameOverText2.enabled = false;
-            //       player = GameObject.FindWithTag("Player");
-            //    if (SceneManager.GetActiveScene().name == "Level4")
-            //    {
-            //        player.GetComponent<Boy>().currentHealth = 5;
-            //        GameObject.Find("Canvas/CurrentHealth").GetComponent<Text>().text = "5";
-            //    }
-            //    else
-            //    {
-            //           player.GetComponent<Boy>().currentHealth = 1;
-            //       }
-            //       sceneL.GetComponent<Scroll>().canScroll = true;
-            //       sceneR.GetComponent<Scroll>().canScroll = true;
-            //   }
-        
         }
 
         if (Input.GetKeyDown(KeyCode.F1))
