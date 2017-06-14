@@ -22,11 +22,12 @@ public class Player : Character {
     [SerializeField]
     private float jumpSpeed = 5;
     public Text weaponCooldownText;
-
+    //public float gravity=-20f;
     // Use this for initialization
     public override void Start ()
     {
         base.Start();
+        Physics2D.gravity = new Vector2(0,-10);
         healthBarUI = GameObject.Find("PlayerStats/HealthBarBG/Health").GetComponent<Image>();
         if (SceneManager.GetActiveScene().name == "Scene2")
         {
